@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shane Pereira &mdash; Product &amp; Supply Chain</title>
+  <meta name="description" content="Lead Technical Product Manager based in Bangalore. Operator-grade product leadership for global commerce and supply chain." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Shane Pereira" />
+  <meta property="og:description" content="Operator-grade product leadership for global commerce and supply chain." />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Shane Pereira" />
+  <meta name="twitter:description" content="Operator-grade product leadership for global commerce and supply chain." />
+
+  <!-- No tracking, no third-party fonts -->
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+      --available: #16a34a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --bg-alt: #141414;
+        --fg: #f0f0f0;
+        --fg-muted: #b8b8b8;
+        --fg-subtle: #7a7a7a;
+        --accent: #8fa8d8;
+        --border: #1f1f1f;
+        --border-strong: #2a2a2a;
+        --available: #22c55e;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* PROFILE GRID */
+    .profile {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 72px 32px 48px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .profile-side {
+      position: sticky;
+      top: 48px;
+    }
+    .portrait {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .profile-side h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .profile-side .role {
+      font-size: 15px;
+      color: var(--fg-muted);
+      margin-bottom: 4px;
+    }
+    .profile-side .location {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      margin-bottom: 18px;
+    }
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--fg-muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 4px 10px 4px 9px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+    .availability .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--available);
+      flex-shrink: 0;
+    }
+
+    /* SIDEBAR SOCIAL LINK LIST */
+    .social {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+    .social a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 120ms ease, padding-left 160ms ease;
+    }
+    .social a:hover {
+      color: var(--accent);
+      padding-left: 4px;
+    }
+    .social a .arrow {
+      color: var(--fg-subtle);
+      font-size: 13px;
+      transition: color 120ms ease, transform 160ms ease;
+    }
+    .social a:hover .arrow {
+      color: var(--accent);
+      transform: translate(2px, -2px);
+    }
+    .social a[aria-disabled="true"] {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .social a[aria-disabled="true"]:hover {
+      color: var(--fg);
+      padding-left: 0;
+    }
+    .social a[aria-disabled="true"]:hover .arrow {
+      color: var(--fg-subtle);
+      transform: none;
+    }
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-left: 6px;
+      vertical-align: 1px;
+      font-weight: 500;
+    }
+
+    /* MAIN CONTENT */
+    .profile-main { min-width: 0; }
+
+    .block {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+    }
+    .block:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .block > h2 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-bottom: 16px;
+    }
+    .block p {
+      color: var(--fg);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    .block p + p {
+      margin-top: 12px;
+    }
+
+    .block-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .block-head h2 { margin-bottom: 0; }
+    .block-head .meta-right {
+      font-size: 12px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.02em;
+    }
+
+    /* INLINE LINK (resume download below timeline, etc.) */
+    .inline-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .inline-link:hover,
+    .inline-link:focus-visible {
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+    .inline-link .arrow {
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform 160ms ease;
+    }
+    .inline-link:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    /* TIMELINE */
+    .timeline {
+      list-style: none;
+    }
+    .timeline > li {
+      padding: 16px 0;
+      border-top: 1px dashed var(--border);
+    }
+    .timeline > li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .timeline-years {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.01em;
+    }
+    .timeline-company {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.3;
+    }
+    .timeline-role {
+      font-size: 14px;
+      color: var(--fg-muted);
+      margin-top: 3px;
+      line-height: 1.45;
+    }
+
+    /* EXPERTISE */
+    .expertise-group {
+      margin-top: 24px;
+    }
+    .expertise-group:first-child { margin-top: 0; }
+    .expertise-group h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+    .expertise-group .summary {
+      font-size: 13.5px;
+      color: var(--fg-muted);
+      margin-bottom: 12px;
+      line-height: 1.55;
+      max-width: 560px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--fg-muted);
+      background: var(--bg-alt);
+      white-space: nowrap;
+      line-height: 1.6;
+    }
+
+    /* CONCEPT DIAGRAMS (inline SVG) */
+    .concept-figure {
+      width: 100%;
+      margin: 0 0 24px 0;
+      padding: 24px 20px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .concept-figure svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .concept-figure svg text {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+    }
+    .concept-figure figcaption {
+      font-size: 12px;
+      color: var(--fg-subtle);
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+      font-style: italic;
+    }
+    /* tighter spacing when used inline inside an essay sub-section */
+    .essay-sub .concept-figure {
+      margin: 14px 0 18px;
+      padding: 18px 14px;
+    }
+    .essay-sub .concept-figure svg {
+      max-width: 700px;
+    }
+
+    /* ESSAY SUB-SECTIONS (On product management) */
+    .essay-sub {
+      margin-top: 24px;
+    }
+    .essay-sub:first-child { margin-top: 0; }
+    .essay-sub h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fg);
+      letter-spacing: -0.005em;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .essay-sub p {
+      color: var(--fg-muted);
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+    .essay-sub p + p {
+      margin-top: 10px;
+    }
+    .essay-sub ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    .essay-sub ul > li {
+      color: var(--fg-muted);
+      font-size: 15.5px;
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+      margin-top: 7px;
+    }
+    .essay-sub ul > li:first-child { margin-top: 0; }
+    .essay-sub ul > li::before {
+      content: "\2014";
+      position: absolute;
+      left: 0;
+      color: var(--fg-subtle);
+    }
+    .essay-sub strong { color: var(--fg); font-weight: 600; }
+
+    /* WRITING FEATURE CARD */
+    .feature {
+      padding: 22px 24px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .feature-kicker {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .feature p {
+      font-size: 15px;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
+    .feature .feature-meta {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      margin-top: 12px;
+    }
+
+    /* PRINCIPLES */
+    .principles-list {
+      list-style: none;
+    }
+    .principles-list > li {
+      padding: 14px 0;
+      border-top: 1px dashed var(--border);
+      font-size: 15px;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
+    .principles-list > li:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .principles-list strong {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 32px 40px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+    }
+    footer p + p { margin-top: 6px; }
+    footer a {
+      color: var(--fg-subtle);
+      text-decoration: underline;
+    }
+    .attribution {
+      margin-top: 14px;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    /* MOBILE */
+    @media (max-width: 760px) {
+      .profile {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 40px 22px 24px;
+      }
+      .profile-side {
+        position: static;
+        text-align: center;
+      }
+      .portrait {
+        margin: 0 auto 16px;
+        width: 128px;
+        height: 128px;
+      }
+      .availability { margin-bottom: 20px; }
+      .social { max-width: 360px; margin: 0 auto; }
+      .block { padding: 24px 0; }
+      .timeline-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .timeline-years { font-size: 12px; order: -1; }
+      footer { padding: 24px 22px 32px; }
+      .concept-figure { padding: 16px 12px; }
+      .essay-sub .concept-figure { padding: 14px 10px; }
+    }
+
+    /*
+      IMAGES
+      ======
+      /site/images/portrait.jpg   — 396x400, headshot (rendered 160px / 128px mobile)
+
+      All other visuals on the page are inline SVG concept diagrams rendered
+      in the content column. They use CSS variables (var(--accent), var(--fg),
+      etc.) so they adapt automatically to light and dark mode.
+
+      Concept diagrams currently on the page:
+        1. Expertise          — Five pillars of PM (architecture banner)
+        2. On PM              — The operating loop (Discovery → Decision → Delivery → Measurement → back)
+        3. Outcomes vs Outputs — Features-shipped list vs trending-outcome chart
+        4. AI cycle time       — Pre-LLM 3-week bar vs Post-LLM 3-hour bar
+
+      To swap the portrait:
+        sips -Z 400 -s format jpeg -s formatOptions 85 <source> --out site/images/portrait.jpg
+    */
+  </style>
+</head>
+<body>
+
+  <div class="profile">
+
+    <!-- IDENTITY SIDEBAR -->
+    <aside class="profile-side">
+      <img class="portrait"
+           src="images/portrait.jpg"
+           alt="Portrait of Shane Pereira"
+           width="160" height="160"
+           loading="eager" />
+      <h1>Shane Pereira</h1>
+      <p class="role">Lead Technical Product Manager</p>
+      <p class="location">Bangalore, India</p>
+
+      <div class="availability">
+        <span class="dot" aria-hidden="true"></span>
+        Open to speaking &amp; advising
+      </div>
+
+      <nav class="social" aria-label="Elsewhere">
+        <a href="https://in.linkedin.com/in/shane-pereira-535970126">
+          <span>LinkedIn</span>
+          <span class="arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a href="mailto:shanepereira05@gmail.com">
+          <span>Email</span>
+          <span class="arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a href="resume.pdf" download="Shane_Pereira_Resume.pdf">
+          <span>R&eacute;sum&eacute; (PDF)</span>
+          <span class="arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a href="#" aria-disabled="true">
+          <span>Newsletter<span class="badge">soon</span></span>
+          <span class="arrow" aria-hidden="true">&#8599;</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT COLUMN -->
+    <main class="profile-main">
+
+      <!-- ABOUT -->
+      <section class="block">
+        <h2>About</h2>
+        <p>I&rsquo;m a product leader who spends my days turning operator problems into working software &mdash; at Nike today, and at PUMA, Hopscotch, and Decathlon before that.</p>
+        <p>My work sits where real-world operations meet software: warehouse floors, packing stations, e-commerce carts, search results. The through-line is <strong>moving real money with systems real people use every day</strong>.</p>
+      </section>
+
+      <!-- NOW -->
+      <section class="block">
+        <div class="block-head">
+          <h2>Now</h2>
+          <span class="meta-right">Updated Nov 2026</span>
+        </div>
+        <p>Leading the Pack &amp; VAS product across Nike distribution centers in Europe, Australia, and Japan. Chairing intake and the Product Council for the Supply Chain Planning technology organization. Building AI-native product practice &mdash; LLM- and MCP-integrated tooling that compresses discovery and prototyping.</p>
+        <p>In the background: writing a newsletter for operators and experimenting with how AI shifts the PM craft itself.</p>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="block">
+        <h2>Experience</h2>
+        <ol class="timeline">
+          <li>
+            <div class="timeline-row">
+              <div class="timeline-years">2026 &mdash; now</div>
+              <div class="timeline-body">
+                <div class="timeline-company">Nike</div>
+                <div class="timeline-role">Lead Technical Product Manager &middot; Supply Chain Planning Technology &middot; Bangalore</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-row">
+              <div class="timeline-years">2022 &mdash; 2026</div>
+              <div class="timeline-body">
+                <div class="timeline-company">PUMA India</div>
+                <div class="timeline-role">Senior Product Manager &middot; Owned &amp; Operated E-Commerce &middot; Bangalore</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-row">
+              <div class="timeline-years">2021</div>
+              <div class="timeline-body">
+                <div class="timeline-company">Hopscotch</div>
+                <div class="timeline-role">Supply Product Manager &middot; Bangalore</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-row">
+              <div class="timeline-years">2013 &mdash; 2021</div>
+              <div class="timeline-body">
+                <div class="timeline-company">Decathlon</div>
+                <div class="timeline-role">Product, E-Commerce &amp; Engineering roles &middot; India, Sri Lanka, France</div>
+              </div>
+            </div>
+          </li>
+        </ol>
+        <a class="inline-link" href="resume.pdf" download="Shane_Pereira_Resume.pdf">
+          Download the full r&eacute;sum&eacute; (PDF, 5 pages)<span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </section>
+
+      <!-- EXPERTISE -->
+      <section class="block">
+        <h2>Expertise</h2>
+
+        <figure class="concept-figure">
+          <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five pillars of product management expertise">
+            <!-- top banner -->
+            <rect x="80" y="20" width="840" height="54" rx="10" fill="var(--accent)" />
+            <text x="500" y="55" text-anchor="middle" font-size="18" fill="#ffffff" font-weight="700" letter-spacing="3">PRODUCT  MANAGEMENT</text>
+
+            <!-- connectors from banner down to each pillar -->
+            <g stroke="var(--border-strong)" stroke-width="1.5">
+              <line x1="170" y1="74" x2="170" y2="135" />
+              <line x1="335" y1="74" x2="335" y2="135" />
+              <line x1="500" y1="74" x2="500" y2="135" />
+              <line x1="665" y1="74" x2="665" y2="135" />
+              <line x1="830" y1="74" x2="830" y2="135" />
+            </g>
+
+            <!-- Pillar 1: Product leadership -->
+            <g>
+              <rect x="105" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
+              <text x="170" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Product</text>
+              <text x="170" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">leadership</text>
+              <line x1="125" y1="192" x2="215" y2="192" stroke="var(--border)" />
+              <text x="170" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Strategy</text>
+              <text x="170" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Roadmap</text>
+              <text x="170" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">OKRs</text>
+              <text x="170" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">GTM</text>
+              <text x="170" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">P&amp;L</text>
+              <text x="170" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">People</text>
+            </g>
+
+            <!-- Pillar 2: Technical product -->
+            <g>
+              <rect x="270" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
+              <text x="335" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Technical</text>
+              <text x="335" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">product</text>
+              <line x1="290" y1="192" x2="380" y2="192" stroke="var(--border)" />
+              <text x="335" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">WMS / WCS</text>
+              <text x="335" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">OMS / TMS</text>
+              <text x="335" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Platform PM</text>
+              <text x="335" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">APIs</text>
+              <text x="335" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Events</text>
+              <text x="335" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Observability</text>
+            </g>
+
+            <!-- Pillar 3: Growth & commerce -->
+            <g>
+              <rect x="435" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
+              <text x="500" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Growth &amp;</text>
+              <text x="500" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">commerce</text>
+              <line x1="455" y1="192" x2="545" y2="192" stroke="var(--border)" />
+              <text x="500" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">D2C / mobile</text>
+              <text x="500" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Search &amp; recs</text>
+              <text x="500" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">A/B &amp; CRO</text>
+              <text x="500" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Payments</text>
+              <text x="500" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">GA4 / GTM</text>
+              <text x="500" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">CRM</text>
+            </g>
+
+            <!-- Pillar 4: AI-native -->
+            <g>
+              <rect x="600" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
+              <text x="665" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">AI-native</text>
+              <text x="665" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">practice</text>
+              <line x1="620" y1="192" x2="710" y2="192" stroke="var(--border)" />
+              <text x="665" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">LLM integration</text>
+              <text x="665" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">MCP tooling</text>
+              <text x="665" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">RAG</text>
+              <text x="665" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Agents</text>
+              <text x="665" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Prompt patterns</text>
+              <text x="665" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Evals</text>
+            </g>
+
+            <!-- Pillar 5: Methods -->
+            <g>
+              <rect x="765" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
+              <text x="830" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Methods</text>
+              <line x1="785" y1="192" x2="875" y2="192" stroke="var(--border)" />
+              <text x="830" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Agile / Scrum</text>
+              <text x="830" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">SAFe / Kanban</text>
+              <text x="830" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Design sprints</text>
+              <text x="830" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Discovery</text>
+              <text x="830" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">JTBD / OST</text>
+              <text x="830" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">PRDs / RFCs</text>
+            </g>
+          </svg>
+          <figcaption>Five pillars &mdash; where I operate and how I combine them.</figcaption>
+        </figure>
+
+        <div class="expertise-group">
+          <h3>Product leadership</h3>
+          <p class="summary">Set the strategy, sequence the work, and own the trade-off conversation end-to-end &mdash; at multi-product, multi-geography scope with both VP-level and front-line operator exposure.</p>
+          <div class="tags">
+            <span class="tag">Product strategy</span>
+            <span class="tag">Product vision</span>
+            <span class="tag">Roadmapping</span>
+            <span class="tag">Portfolio management</span>
+            <span class="tag">Business case &amp; ROI</span>
+            <span class="tag">P&amp;L awareness</span>
+            <span class="tag">OKRs</span>
+            <span class="tag">North-star metrics</span>
+            <span class="tag">RICE / Kano / MoSCoW</span>
+            <span class="tag">Executive &amp; C-suite stakeholder management</span>
+            <span class="tag">Cross-functional leadership</span>
+            <span class="tag">People leadership &amp; PM mentoring</span>
+            <span class="tag">Global program delivery</span>
+            <span class="tag">Go-to-market (GTM)</span>
+            <span class="tag">Launch planning</span>
+            <span class="tag">Change management</span>
+          </div>
+        </div>
+
+        <div class="expertise-group">
+          <h3>Technical product</h3>
+          <p class="summary">Where operator problems meet systems &mdash; distribution-center software, platform integrations, and the event-driven plumbing that lets fulfillment, order management, and warehouse control talk to each other without edge cases.</p>
+          <div class="tags">
+            <span class="tag">Supply chain technology</span>
+            <span class="tag">Warehouse management (WMS / WCS)</span>
+            <span class="tag">Manhattan Active WM</span>
+            <span class="tag">Transportation management (TMS)</span>
+            <span class="tag">Order management (OMS)</span>
+            <span class="tag">Distribution-center operations</span>
+            <span class="tag">Pack &amp; VAS workflows</span>
+            <span class="tag">Pick-to-pack flow</span>
+            <span class="tag">Omnichannel fulfillment</span>
+            <span class="tag">Inventory &amp; slotting</span>
+            <span class="tag">Platform PM</span>
+            <span class="tag">APIs &amp; integration</span>
+            <span class="tag">Event-driven systems</span>
+            <span class="tag">System design</span>
+            <span class="tag">Non-functional requirements</span>
+            <span class="tag">Observability &amp; ops</span>
+            <span class="tag">Developer experience</span>
+          </div>
+        </div>
+
+        <div class="expertise-group">
+          <h3>Growth &amp; commerce</h3>
+          <p class="summary">App and web conversion, personalization, payments, and the full analytics stack behind them &mdash; from a global commerce app launch, to hybrid search &amp; recommendations at retail scale, to multi-country GA4 migration.</p>
+          <div class="tags">
+            <span class="tag">E-commerce &amp; D2C</span>
+            <span class="tag">Mobile app PM (iOS / Android)</span>
+            <span class="tag">Headless &amp; composable commerce</span>
+            <span class="tag">Search &amp; recommendations</span>
+            <span class="tag">Hybrid (collaborative + content) filtering</span>
+            <span class="tag">Personalization</span>
+            <span class="tag">ML-driven recommendation engines</span>
+            <span class="tag">A/B testing &amp; experimentation</span>
+            <span class="tag">Conversion rate optimization (CRO)</span>
+            <span class="tag">Funnel &amp; checkout optimization</span>
+            <span class="tag">Cart abandonment recovery</span>
+            <span class="tag">Payments (BNPL, pay-in-3)</span>
+            <span class="tag">CRM (CleverTap, Emarsys)</span>
+            <span class="tag">Marketing automation</span>
+            <span class="tag">Deep linking (Branch)</span>
+            <span class="tag">AOV &amp; CLV</span>
+            <span class="tag">Cohort &amp; retention analysis</span>
+            <span class="tag">GA4, GTM, server-side tracking</span>
+            <span class="tag">Splunk</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">SAP</span>
+          </div>
+        </div>
+
+        <div class="expertise-group">
+          <h3>AI-native practice</h3>
+          <p class="summary">AI as leverage for the PM job itself &mdash; LLM- and MCP-integrated tooling that compresses discovery, prototypes to high-fidelity in hours, and lifts PRD quality through structured prompt patterns.</p>
+          <div class="tags">
+            <span class="tag">Generative AI PM</span>
+            <span class="tag">LLM integration</span>
+            <span class="tag">Model Context Protocol (MCP)</span>
+            <span class="tag">RAG &amp; retrieval over internal corpora</span>
+            <span class="tag">Embeddings &amp; vector search</span>
+            <span class="tag">Prompt engineering &amp; prompt patterns</span>
+            <span class="tag">Agent workflows</span>
+            <span class="tag">Function calling &amp; tool use</span>
+            <span class="tag">AI-accelerated discovery</span>
+            <span class="tag">AI-assisted prototyping</span>
+            <span class="tag">Evals &amp; eval frameworks</span>
+            <span class="tag">Human-in-the-loop</span>
+            <span class="tag">Responsible-AI guardrails</span>
+          </div>
+        </div>
+
+        <div class="expertise-group">
+          <h3>Methods</h3>
+          <p class="summary">The craft &mdash; how ideas move from signal to shipped. I write things down, measure before I argue, prefer directness, and keep opportunity cost in every prioritization conversation.</p>
+          <div class="tags">
+            <span class="tag">Agile</span>
+            <span class="tag">Scrum</span>
+            <span class="tag">SAFe</span>
+            <span class="tag">Kanban</span>
+            <span class="tag">Design sprints</span>
+            <span class="tag">Discovery &amp; user research</span>
+            <span class="tag">Operator / field interviews</span>
+            <span class="tag">Jobs-to-be-done (JTBD)</span>
+            <span class="tag">User story mapping</span>
+            <span class="tag">Opportunity solution trees</span>
+            <span class="tag">Journey mapping</span>
+            <span class="tag">PRDs &amp; product specs</span>
+            <span class="tag">Decision logs / RFCs</span>
+            <span class="tag">Written-decision culture</span>
+            <span class="tag">Measurement-first product ops</span>
+            <span class="tag">OKR facilitation</span>
+            <span class="tag">Pre-mortems &amp; retros</span>
+            <span class="tag">RACI</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ON PRODUCT MANAGEMENT -->
+      <section class="block">
+        <h2>On product management</h2>
+
+        <figure class="concept-figure">
+          <svg viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The product management operating loop: discovery to decision to delivery to measurement, repeating">
+            <defs>
+              <marker id="arrow-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--accent)" />
+              </marker>
+              <marker id="arrow-head-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--accent)" opacity="0.7" />
+              </marker>
+            </defs>
+
+            <!-- Four boxes -->
+            <g>
+              <rect x="80" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="170" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Discovery</text>
+              <text x="170" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">frame the problem</text>
+            </g>
+            <g>
+              <rect x="300" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="390" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Decision</text>
+              <text x="390" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">sequence the work</text>
+            </g>
+            <g>
+              <rect x="520" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="610" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Delivery</text>
+              <text x="610" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">ship small, learn</text>
+            </g>
+            <g>
+              <rect x="740" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="830" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Measurement</text>
+              <text x="830" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">what the data says</text>
+            </g>
+
+            <!-- Forward arrows between boxes -->
+            <line x1="263" y1="100" x2="295" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arrow-head)" />
+            <line x1="483" y1="100" x2="515" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arrow-head)" />
+            <line x1="703" y1="100" x2="735" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arrow-head)" />
+
+            <!-- Return loop from Measurement back to Discovery -->
+            <path d="M 830 145 L 830 190 L 170 190 L 170 145"
+                  fill="none" stroke="var(--accent)" stroke-width="2"
+                  stroke-dasharray="5 4" opacity="0.75"
+                  marker-end="url(#arrow-head-dashed)" />
+            <text x="500" y="215" text-anchor="middle" font-size="11" fill="var(--fg-subtle)" font-style="italic">repeat &mdash; every loop teaches you where to invest in the next one</text>
+          </svg>
+          <figcaption>The product operating loop &mdash; four stacked loops, not four phases.</figcaption>
+        </figure>
+
+        <div class="essay-sub">
+          <h3>What the job actually is</h3>
+          <p>Product management is the discipline of deciding what gets built next and what doesn&rsquo;t &mdash; and then being accountable for that decision when the numbers come in. Everything else &mdash; specs, roadmaps, standups, OKRs &mdash; is apparatus around that one core act.</p>
+          <p>The craft is doing it in the open, in writing, with trade-offs named and opportunity cost quantified, so the decision survives contact with the next quarter.</p>
+        </div>
+
+        <div class="essay-sub">
+          <h3>Reading the lifecycle</h3>
+          <p>Every product sits somewhere on the lifecycle curve, and the PM job is different in each stage. Confusing which stage you&rsquo;re in is the quiet way most roadmaps go wrong.</p>
+
+          <figure class="concept-figure">
+            <svg viewBox="0 0 1000 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product lifecycle curve across four stages: introduction, growth, maturity, decline">
+              <!-- Stage labels at top -->
+              <text x="172" y="26" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700" letter-spacing="1">INTRODUCTION</text>
+              <text x="397" y="26" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700" letter-spacing="1">GROWTH</text>
+              <text x="622" y="26" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700" letter-spacing="1">MATURITY</text>
+              <text x="847" y="26" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700" letter-spacing="1">DECLINE</text>
+
+              <!-- Axes -->
+              <line x1="60" y1="50" x2="60" y2="240" stroke="var(--border-strong)" stroke-width="1" />
+              <line x1="60" y1="240" x2="960" y2="240" stroke="var(--border-strong)" stroke-width="1" />
+              <text x="52" y="60" text-anchor="end" font-size="10" fill="var(--fg-subtle)">adoption</text>
+              <text x="960" y="256" text-anchor="end" font-size="10" fill="var(--fg-subtle)">time &rarr;</text>
+
+              <!-- Stage dividers -->
+              <line x1="285" y1="50" x2="285" y2="240" stroke="var(--border)" stroke-dasharray="3 4" />
+              <line x1="510" y1="50" x2="510" y2="240" stroke="var(--border)" stroke-dasharray="3 4" />
+              <line x1="735" y1="50" x2="735" y2="240" stroke="var(--border)" stroke-dasharray="3 4" />
+
+              <!-- Lifecycle curve: slow rise → steep growth → plateau → decline -->
+              <path d="M 60 230
+                       C 150 225, 220 215, 285 180
+                       C 350 130, 440 75, 510 60
+                       C 590 55, 690 70, 735 90
+                       C 800 120, 880 180, 960 220"
+                    fill="none" stroke="var(--accent)" stroke-width="3" />
+
+              <!-- Stage-transition dots -->
+              <circle cx="285" cy="180" r="5" fill="var(--accent)" />
+              <circle cx="510" cy="60" r="6" fill="var(--accent)" />
+              <circle cx="735" cy="90" r="5" fill="var(--accent)" />
+
+              <!-- PM job descriptions at bottom of each stage -->
+              <text x="172" y="265" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">build awareness</text>
+              <text x="172" y="281" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">hunt signal</text>
+              <text x="172" y="297" text-anchor="middle" font-size="10.5" fill="var(--fg-subtle)" font-style="italic">PM: founder-mode</text>
+
+              <text x="397" y="265" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">scale what works</text>
+              <text x="397" y="281" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">resist feature creep</text>
+              <text x="397" y="297" text-anchor="middle" font-size="10.5" fill="var(--fg-subtle)" font-style="italic">PM: multiplier</text>
+
+              <text x="622" y="265" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">defend share</text>
+              <text x="622" y="281" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">hunt next S-curve</text>
+              <text x="622" y="297" text-anchor="middle" font-size="10.5" fill="var(--fg-subtle)" font-style="italic">PM: operator</text>
+
+              <text x="847" y="265" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">invest, divest,</text>
+              <text x="847" y="281" text-anchor="middle" font-size="10.5" fill="var(--fg-muted)">or sunset</text>
+              <text x="847" y="297" text-anchor="middle" font-size="10.5" fill="var(--fg-subtle)" font-style="italic">PM: honest witness</text>
+            </svg>
+            <figcaption>The job is different in each stage &mdash; and the hardest judgement call is deciding when you&rsquo;ve left one and entered the next.</figcaption>
+          </figure>
+        </div>
+
+        <div class="essay-sub">
+          <h3>The operating loop</h3>
+          <p>A product org is really four loops stacked on each other:</p>
+          <ul>
+            <li><strong>Discovery</strong> &mdash; turning a vague business goal into a concrete, falsifiable problem worth solving.</li>
+            <li><strong>Decision</strong> &mdash; ranking candidate problems against capacity, risk, and reversibility.</li>
+            <li><strong>Delivery</strong> &mdash; shipping something small enough that you can actually learn from it.</li>
+            <li><strong>Measurement</strong> &mdash; looking at what the data actually says, not what you hoped it would say.</li>
+          </ul>
+          <p>When any one of those loops is broken, the others get louder to compensate &mdash; and the whole team slows down.</p>
+        </div>
+
+        <div class="essay-sub">
+          <h3>Where great PMs spend their time</h3>
+          <p>Not on tickets. Great PMs spend disproportionate time at the two ends of the loop &mdash; the discovery end (talking to users, framing problems) and the measurement end (reading telemetry, telling the honest story of what happened). The middle is easier to delegate than people think.</p>
+        </div>
+
+        <div class="essay-sub">
+          <h3>Outcomes over outputs</h3>
+          <p>Most product teams don&rsquo;t fail because they lack talent. They fail because they:</p>
+          <ul>
+            <li>Ship opinions instead of hypotheses.</li>
+            <li>Confuse busy with valuable.</li>
+            <li>Let the loudest stakeholder quietly set priorities.</li>
+            <li>Measure outputs (features shipped) instead of outcomes (problems solved).</li>
+            <li>Add process in response to pain, instead of asking what caused the pain.</li>
+          </ul>
+
+          <p>The antidote is cheap: write the hypothesis before the sprint, write the result after, and let the two paragraphs argue in front of the whole team.</p>
+        </div>
+
+        <div class="essay-sub">
+          <h3>Product versus project</h3>
+          <p>Project managers deliver scope on time. Product managers deliver outcomes at acceptable cost. The two disciplines look similar from a distance and are often conflated, but the operating question is different: a project manager asks <em>&ldquo;will we hit the date?&rdquo;</em>, a product manager asks <em>&ldquo;is this still the right thing to be doing?&rdquo;</em>.</p>
+          <p>A good PM moves between the two modes depending on where risk sits. A great one tells the team which mode they&rsquo;re in, and why, before the sprint starts.</p>
+        </div>
+
+        <div class="essay-sub">
+          <h3>Technical PM, specifically</h3>
+          <p>A technical PM owns the same outcomes as any PM but with a steeper ramp on architecture, dependencies, and trade-offs between velocity and future flexibility. The bar is being able to sit in an engineering design review and ask the second-order question &mdash; what breaks at 10x, what the migration path is, what we&rsquo;re locking ourselves into &mdash; without forcing an engineer to translate the business case.</p>
+          <p>At platform or infrastructure scope, the customer is other engineering teams; the metrics are adoption, self-serve rate, and incident frequency; the roadmap is a contract.</p>
+        </div>
+
+        <div class="essay-sub">
+          <h3>AI and the PM craft</h3>
+          <p>The PM job is quietly changing more than most of us admit. LLMs collapse the discovery-to-prototype cycle from weeks to hours. MCP-style tooling lets a solo PM read across thousands of Jira and Confluence artefacts in minutes. Structured prompt patterns measurably lift spec quality. The frontier is no longer <em>&ldquo;can we build this?&rdquo;</em> &mdash; it&rsquo;s <em>&ldquo;what should we build, and how will we know it worked?&rdquo;</em></p>
+
+          <p>The PMs who lean into this get an order of magnitude more leverage. The ones who don&rsquo;t will fall behind the ones who do.</p>
+        </div>
+      </section>
+
+      <!-- WRITING -->
+      <section class="block">
+        <h2>Writing</h2>
+        <div class="feature">
+          <div class="feature-kicker">Newsletter</div>
+          <div class="feature-title">Global Ecommerce Operator</div>
+          <p>Short, operator-perspective essays on product management, supply chain, and the AI tooling making both faster.</p>
+          <p class="feature-meta">Launching soon. Email me and I&rsquo;ll add you to the first-issue list.</p>
+        </div>
+      </section>
+
+      <!-- PRINCIPLES -->
+      <section class="block">
+        <h2>How I work</h2>
+        <ul class="principles-list">
+          <li><strong>Measure first, then ship.</strong> Opinions without numbers don&rsquo;t compound; numbers without context don&rsquo;t travel.</li>
+          <li><strong>Operators over elegance.</strong> The athlete on the warehouse floor and the shopper in the app rate your work higher than any architecture diagram does. Build for them.</li>
+          <li><strong>Written over verbal.</strong> Decisions in writing get better the second time someone reads them. Verbal decisions get re-litigated the second time anyone remembers them.</li>
+          <li><strong>AI as leverage, not replacement.</strong> The best product teams right now are three strong humans plus ten AI copilots, not thirty juniors.</li>
+          <li><strong>Trade-offs in the open.</strong> Every prioritization decision names what is being deferred. Opportunity cost is a first-class number, not a footnote.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Shane Pereira.</p>
+    <p>Views expressed here are my own and do not represent my employer.</p>
+    <p class="attribution">Built as a static page &mdash; no tracking, no third-party fonts. All diagrams are inline SVG.</p>
+  </footer>
+
+</body>
+</html>
