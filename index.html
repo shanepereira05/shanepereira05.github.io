@@ -23,7 +23,7 @@
 
   <style>
     :root {
-      color-scheme: light dark;
+      color-scheme: light;   /* locked to white/light — no auto dark-mode */
       --bg: #ffffff;
       --bg-alt: #fafafa;
       --fg: #111111;
@@ -34,19 +34,7 @@
       --border-strong: #d8d8d8;
       --available: #16a34a;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0a0a0a;
-        --bg-alt: #141414;
-        --fg: #f0f0f0;
-        --fg-muted: #b8b8b8;
-        --fg-subtle: #7a7a7a;
-        --accent: #8fa8d8;
-        --border: #1f1f1f;
-        --border-strong: #2a2a2a;
-        --available: #22c55e;
-      }
-    }
+    /* Dark-mode override removed — site now displays with a white background on all OS settings. */
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg); scroll-behavior: smooth; }
@@ -319,6 +307,91 @@
       line-height: 1.6;
     }
 
+    /* Section intro paragraph */
+    .block .block-intro {
+      color: var(--fg-muted);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      max-width: 580px;
+    }
+
+    /* TOOLS MARQUEE (rotating carousel) */
+    .tools-marquee {
+      overflow: hidden;
+      padding: 8px 0 4px;
+      position: relative;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+              mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    }
+    .tools-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      animation: tools-scroll 60s linear infinite;
+    }
+    .tools-track:hover,
+    .tools-track:focus-within {
+      animation-play-state: paused;
+    }
+    .tool-pill {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      height: 130px;
+      padding: 16px 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-align: center;
+      gap: 10px;
+    }
+    .tool-pill .logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 100%;
+    }
+    .tool-pill .logo-wrap img {
+      max-height: 36px;
+      max-width: 100px;
+      width: auto;
+      height: auto;
+      /* Full brand color — no filter */
+      opacity: 0.95;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .tool-pill:hover .logo-wrap img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    .tool-pill .name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+      letter-spacing: -0.005em;
+      line-height: 1.2;
+    }
+    .tool-pill .cat {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      line-height: 1;
+    }
+    @keyframes tools-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tools-track { animation: none; }
+    }
+
     /* CONCEPT DIAGRAMS (inline SVG) */
     .concept-figure {
       width: 100%;
@@ -510,10 +583,9 @@
       etc.) so they adapt automatically to light and dark mode.
 
       Concept diagrams currently on the page:
-        1. Expertise          — Five pillars of PM (architecture banner)
-        2. On PM              — The operating loop (Discovery → Decision → Delivery → Measurement → back)
-        3. Outcomes vs Outputs — Features-shipped list vs trending-outcome chart
-        4. AI cycle time       — Pre-LLM 3-week bar vs Post-LLM 3-hour bar
+        1. Expertise          — Three-circle product foundation (Desirable / Viable / Feasible)
+        2. On PM              — Build → Measure → Learn (the Lean Startup loop)
+        3. Reading the lifecycle — Product lifecycle curve (Introduction / Growth / Maturity / Decline)
 
       To swap the portrait:
         sips -Z 400 -s format jpeg -s formatOptions 85 <source> --out site/images/portrait.jpg
@@ -635,91 +707,33 @@
         <h2>Expertise</h2>
 
         <figure class="concept-figure">
-          <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five pillars of product management expertise">
-            <!-- top banner -->
-            <rect x="80" y="20" width="840" height="54" rx="10" fill="var(--accent)" />
-            <text x="500" y="55" text-anchor="middle" font-size="18" fill="#ffffff" font-weight="700" letter-spacing="3">PRODUCT  MANAGEMENT</text>
+          <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The three-circle product foundation: desirable, viable, and feasible intersect to make a great product">
+            <!-- Desirable circle (top-left) -->
+            <circle cx="380" cy="230" r="180" fill="var(--accent)" fill-opacity="0.09" stroke="var(--accent)" stroke-width="2" />
+            <!-- Viable circle (top-right) -->
+            <circle cx="620" cy="230" r="180" fill="var(--accent)" fill-opacity="0.09" stroke="var(--accent)" stroke-width="2" />
+            <!-- Feasible circle (bottom-center) -->
+            <circle cx="500" cy="370" r="180" fill="var(--accent)" fill-opacity="0.09" stroke="var(--accent)" stroke-width="2" />
 
-            <!-- connectors from banner down to each pillar -->
-            <g stroke="var(--border-strong)" stroke-width="1.5">
-              <line x1="170" y1="74" x2="170" y2="135" />
-              <line x1="335" y1="74" x2="335" y2="135" />
-              <line x1="500" y1="74" x2="500" y2="135" />
-              <line x1="665" y1="74" x2="665" y2="135" />
-              <line x1="830" y1="74" x2="830" y2="135" />
-            </g>
+            <!-- External labels -->
+            <text x="200" y="120" text-anchor="middle" font-size="18" fill="var(--fg)" font-weight="700" letter-spacing="2">DESIRABLE</text>
+            <text x="200" y="140" text-anchor="middle" font-size="12" fill="var(--fg-muted)">users need it and want it</text>
 
-            <!-- Pillar 1: Product leadership -->
-            <g>
-              <rect x="105" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
-              <text x="170" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Product</text>
-              <text x="170" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">leadership</text>
-              <line x1="125" y1="192" x2="215" y2="192" stroke="var(--border)" />
-              <text x="170" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Strategy</text>
-              <text x="170" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Roadmap</text>
-              <text x="170" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">OKRs</text>
-              <text x="170" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">GTM</text>
-              <text x="170" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">P&amp;L</text>
-              <text x="170" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">People</text>
-            </g>
+            <text x="800" y="120" text-anchor="middle" font-size="18" fill="var(--fg)" font-weight="700" letter-spacing="2">VIABLE</text>
+            <text x="800" y="140" text-anchor="middle" font-size="12" fill="var(--fg-muted)">the business works</text>
 
-            <!-- Pillar 2: Technical product -->
-            <g>
-              <rect x="270" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
-              <text x="335" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Technical</text>
-              <text x="335" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">product</text>
-              <line x1="290" y1="192" x2="380" y2="192" stroke="var(--border)" />
-              <text x="335" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">WMS / WCS</text>
-              <text x="335" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">OMS / TMS</text>
-              <text x="335" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Platform PM</text>
-              <text x="335" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">APIs</text>
-              <text x="335" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Events</text>
-              <text x="335" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Observability</text>
-            </g>
+            <text x="500" y="525" text-anchor="middle" font-size="18" fill="var(--fg)" font-weight="700" letter-spacing="2">FEASIBLE</text>
+            <text x="500" y="545" text-anchor="middle" font-size="12" fill="var(--fg-muted)">we can actually build it</text>
 
-            <!-- Pillar 3: Growth & commerce -->
-            <g>
-              <rect x="435" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
-              <text x="500" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Growth &amp;</text>
-              <text x="500" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">commerce</text>
-              <line x1="455" y1="192" x2="545" y2="192" stroke="var(--border)" />
-              <text x="500" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">D2C / mobile</text>
-              <text x="500" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Search &amp; recs</text>
-              <text x="500" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">A/B &amp; CRO</text>
-              <text x="500" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Payments</text>
-              <text x="500" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">GA4 / GTM</text>
-              <text x="500" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">CRM</text>
-            </g>
-
-            <!-- Pillar 4: AI-native -->
-            <g>
-              <rect x="600" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
-              <text x="665" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">AI-native</text>
-              <text x="665" y="176" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">practice</text>
-              <line x1="620" y1="192" x2="710" y2="192" stroke="var(--border)" />
-              <text x="665" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">LLM integration</text>
-              <text x="665" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">MCP tooling</text>
-              <text x="665" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">RAG</text>
-              <text x="665" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Agents</text>
-              <text x="665" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Prompt patterns</text>
-              <text x="665" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Evals</text>
-            </g>
-
-            <!-- Pillar 5: Methods -->
-            <g>
-              <rect x="765" y="135" width="130" height="180" rx="8" fill="var(--bg)" stroke="var(--border-strong)" stroke-width="1.5" />
-              <text x="830" y="160" text-anchor="middle" font-size="12" fill="var(--fg)" font-weight="700">Methods</text>
-              <line x1="785" y1="192" x2="875" y2="192" stroke="var(--border)" />
-              <text x="830" y="215" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Agile / Scrum</text>
-              <text x="830" y="232" text-anchor="middle" font-size="10" fill="var(--fg-muted)">SAFe / Kanban</text>
-              <text x="830" y="249" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Design sprints</text>
-              <text x="830" y="266" text-anchor="middle" font-size="10" fill="var(--fg-muted)">Discovery</text>
-              <text x="830" y="283" text-anchor="middle" font-size="10" fill="var(--fg-muted)">JTBD / OST</text>
-              <text x="830" y="300" text-anchor="middle" font-size="10" fill="var(--fg-muted)">PRDs / RFCs</text>
-            </g>
+            <!-- Center product sweet-spot pill -->
+            <circle cx="500" cy="285" r="42" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+            <text x="500" y="282" text-anchor="middle" font-size="11" fill="var(--accent)" font-weight="700" letter-spacing="1.5">PRODUCT</text>
+            <text x="500" y="298" text-anchor="middle" font-size="9" fill="var(--fg-subtle)" letter-spacing="0.5">sweet spot</text>
           </svg>
-          <figcaption>Five pillars &mdash; where I operate and how I combine them.</figcaption>
+          <figcaption>The product sweet spot &mdash; a good product sits where <strong>users want it</strong>, the <strong>business works</strong>, and the <strong>team can build it</strong>. Miss any one and the product fails.</figcaption>
         </figure>
+        <!-- OLD Five-Pillars diagram replaced by the three-circle product foundation (Desirable/Viable/Feasible). -->
+
 
         <div class="expertise-group">
           <h3>Product leadership</h3>
@@ -842,56 +856,99 @@
         </div>
       </section>
 
+      <!-- TOOLS -->
+      <section id="tools" class="block">
+        <h2>Tools I&rsquo;ve worked with</h2>
+        <p class="block-intro">Platforms I&rsquo;ve shipped with across supply chain, commerce, mobile, analytics, and AI &mdash; sometimes as the product owner, sometimes as the integrator stitching them into a larger system.</p>
+
+        <div class="tools-marquee" aria-label="Rotating list of tools I have worked with">
+          <div class="tools-track">
+            <!-- First copy -->
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/manhattan.svg" alt="Manhattan" loading="lazy" /></div><span class="name">Manhattan</span><span class="cat">WMS</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/sap.svg" alt="SAP" loading="lazy" /></div><span class="name">SAP</span><span class="cat">ERP</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/aws.svg" alt="Amazon Web Services" loading="lazy" /></div><span class="name">AWS</span><span class="cat">Cloud</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/google-workspace.svg" alt="Google Workspace" loading="lazy" /></div><span class="name">Google Workspace</span><span class="cat">Productivity</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/algolia.svg" alt="Algolia" loading="lazy" /></div><span class="name">Algolia</span><span class="cat">Search</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/branch.svg" alt="Branch.io" loading="lazy" /></div><span class="name">Branch.io</span><span class="cat">Attribution</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/google-analytics.svg" alt="Google Analytics" loading="lazy" /></div><span class="name">Google Analytics</span><span class="cat">Analytics</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/clevertap.svg" alt="CleverTap" loading="lazy" /></div><span class="name">CleverTap</span><span class="cat">CRM</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/react.svg" alt="React" loading="lazy" /></div><span class="name">React JS</span><span class="cat">Frontend</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/databricks.svg" alt="Databricks" loading="lazy" /></div><span class="name">Databricks</span><span class="cat">Data</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/appstore.svg" alt="App Store" loading="lazy" /></div><span class="name">App Store</span><span class="cat">Mobile</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/hotjar.svg" alt="Hotjar" loading="lazy" /></div><span class="name">Hotjar</span><span class="cat">Behavioural</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/bloomreach.svg" alt="Bloomreach" loading="lazy" /></div><span class="name">Bloomreach</span><span class="cat">Search</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/googleplay.svg" alt="Google Play" loading="lazy" /></div><span class="name">Google Play</span><span class="cat">Mobile</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/apptopia.svg" alt="Apptopia" loading="lazy" /></div><span class="name">Apptopia</span><span class="cat">Mobile intel</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/clarity.svg" alt="MS Clarity" loading="lazy" /></div><span class="name">MS Clarity</span><span class="cat">Behavioural</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/vertex.svg" alt="Vertex AI Search" loading="lazy" /></div><span class="name">Vertex AI Search</span><span class="cat">Search</span></div>
+            <div class="tool-pill"><div class="logo-wrap"><img src="images/tools/cursor.svg" alt="Cursor" loading="lazy" /></div><span class="name">Cursor</span><span class="cat">AI IDE</span></div>
+            <!-- Second copy (seamless loop) -->
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/manhattan.svg" alt="" loading="lazy" /></div><span class="name">Manhattan</span><span class="cat">WMS</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/sap.svg" alt="" loading="lazy" /></div><span class="name">SAP</span><span class="cat">ERP</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/aws.svg" alt="" loading="lazy" /></div><span class="name">AWS</span><span class="cat">Cloud</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/google-workspace.svg" alt="" loading="lazy" /></div><span class="name">Google Workspace</span><span class="cat">Productivity</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/algolia.svg" alt="" loading="lazy" /></div><span class="name">Algolia</span><span class="cat">Search</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/branch.svg" alt="" loading="lazy" /></div><span class="name">Branch.io</span><span class="cat">Attribution</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/google-analytics.svg" alt="" loading="lazy" /></div><span class="name">Google Analytics</span><span class="cat">Analytics</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/clevertap.svg" alt="" loading="lazy" /></div><span class="name">CleverTap</span><span class="cat">CRM</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/react.svg" alt="" loading="lazy" /></div><span class="name">React JS</span><span class="cat">Frontend</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/databricks.svg" alt="" loading="lazy" /></div><span class="name">Databricks</span><span class="cat">Data</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/appstore.svg" alt="" loading="lazy" /></div><span class="name">App Store</span><span class="cat">Mobile</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/hotjar.svg" alt="" loading="lazy" /></div><span class="name">Hotjar</span><span class="cat">Behavioural</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/bloomreach.svg" alt="" loading="lazy" /></div><span class="name">Bloomreach</span><span class="cat">Search</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/googleplay.svg" alt="" loading="lazy" /></div><span class="name">Google Play</span><span class="cat">Mobile</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/apptopia.svg" alt="" loading="lazy" /></div><span class="name">Apptopia</span><span class="cat">Mobile intel</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/clarity.svg" alt="" loading="lazy" /></div><span class="name">MS Clarity</span><span class="cat">Behavioural</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/vertex.svg" alt="" loading="lazy" /></div><span class="name">Vertex AI Search</span><span class="cat">Search</span></div>
+            <div class="tool-pill" aria-hidden="true"><div class="logo-wrap"><img src="images/tools/cursor.svg" alt="" loading="lazy" /></div><span class="name">Cursor</span><span class="cat">AI IDE</span></div>
+          </div>
+        </div>
+      </section>
+
       <!-- ON PRODUCT MANAGEMENT -->
       <section class="block">
         <h2>On product management</h2>
 
         <figure class="concept-figure">
-          <svg viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The product management operating loop: discovery to decision to delivery to measurement, repeating">
+          <svg viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Build, Measure, Learn — the Lean Startup foundation loop">
             <defs>
-              <marker id="arrow-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <marker id="bml-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
                 <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--accent)" />
               </marker>
-              <marker id="arrow-head-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <marker id="bml-arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
                 <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--accent)" opacity="0.7" />
               </marker>
             </defs>
 
-            <!-- Four boxes -->
+            <!-- Three boxes -->
             <g>
-              <rect x="80" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
-              <text x="170" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Discovery</text>
-              <text x="170" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">frame the problem</text>
+              <rect x="80" y="60" width="240" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="200" y="98" text-anchor="middle" font-size="16" fill="var(--fg)" font-weight="700">BUILD</text>
+              <text x="200" y="120" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">minimum viable product</text>
             </g>
             <g>
-              <rect x="300" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
-              <text x="390" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Decision</text>
-              <text x="390" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">sequence the work</text>
+              <rect x="380" y="60" width="240" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="500" y="98" text-anchor="middle" font-size="16" fill="var(--fg)" font-weight="700">MEASURE</text>
+              <text x="500" y="120" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">real user behaviour</text>
             </g>
             <g>
-              <rect x="520" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
-              <text x="610" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Delivery</text>
-              <text x="610" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">ship small, learn</text>
-            </g>
-            <g>
-              <rect x="740" y="60" width="180" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
-              <text x="830" y="95" text-anchor="middle" font-size="14" fill="var(--fg)" font-weight="700">Measurement</text>
-              <text x="830" y="118" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">what the data says</text>
+              <rect x="680" y="60" width="240" height="80" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" />
+              <text x="800" y="98" text-anchor="middle" font-size="16" fill="var(--fg)" font-weight="700">LEARN</text>
+              <text x="800" y="120" text-anchor="middle" font-size="11" fill="var(--fg-subtle)">sharpen the hypothesis</text>
             </g>
 
-            <!-- Forward arrows between boxes -->
-            <line x1="263" y1="100" x2="295" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arrow-head)" />
-            <line x1="483" y1="100" x2="515" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arrow-head)" />
-            <line x1="703" y1="100" x2="735" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#arrow-head)" />
+            <!-- Forward arrows -->
+            <line x1="323" y1="100" x2="377" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#bml-arrow)" />
+            <line x1="623" y1="100" x2="677" y2="100" stroke="var(--accent)" stroke-width="2.5" marker-end="url(#bml-arrow)" />
 
-            <!-- Return loop from Measurement back to Discovery -->
-            <path d="M 830 145 L 830 190 L 170 190 L 170 145"
+            <!-- Return loop -->
+            <path d="M 800 145 L 800 190 L 200 190 L 200 145"
                   fill="none" stroke="var(--accent)" stroke-width="2"
                   stroke-dasharray="5 4" opacity="0.75"
-                  marker-end="url(#arrow-head-dashed)" />
-            <text x="500" y="215" text-anchor="middle" font-size="11" fill="var(--fg-subtle)" font-style="italic">repeat &mdash; every loop teaches you where to invest in the next one</text>
+                  marker-end="url(#bml-arrow-dashed)" />
+            <text x="500" y="215" text-anchor="middle" font-size="11" fill="var(--fg-subtle)" font-style="italic">repeat &mdash; validated learning compounds faster than any plan</text>
           </svg>
-          <figcaption>The product operating loop &mdash; four stacked loops, not four phases.</figcaption>
+          <figcaption>Build, measure, learn &mdash; the Lean Startup loop. Every feature is a <strong>hypothesis</strong>; the loop is how you prove or kill it.</figcaption>
         </figure>
 
         <div class="essay-sub">
