@@ -17,7 +17,7 @@
 
   <style>
     :root {
-      color-scheme: light dark;
+      color-scheme: light;   /* locked to white */
       --bg: #ffffff;
       --bg-alt: #fafafa;
       --fg: #111111;
@@ -27,19 +27,6 @@
       --border: #eaeaea;
       --border-strong: #d8d8d8;
       --pullquote-bg: rgba(31, 59, 107, 0.04);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0a0a0a;
-        --bg-alt: #141414;
-        --fg: #f0f0f0;
-        --fg-muted: #c0c0c0;
-        --fg-subtle: #7a7a7a;
-        --accent: #8fa8d8;
-        --border: #1f1f1f;
-        --border-strong: #2a2a2a;
-        --pullquote-bg: rgba(143, 168, 216, 0.06);
-      }
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }

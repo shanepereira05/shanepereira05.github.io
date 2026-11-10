@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Every PM got a chainsaw. Now what? &mdash; Shane Pereira</title>
+  <meta name="description" content="A year of AI across my PM team — where it worked, where we sawed trees to make toothpicks, and the habit that fixed it." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/writing/chainsaw.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Every PM got a chainsaw. Now what?" />
+  <meta property="og:description" content="A year of AI across my PM team — where it worked, where we sawed trees to make toothpicks, and the habit that fixed it." />
+  <meta property="article:author" content="Shane Pereira" />
+  <meta property="article:published_time" content="2026-11-10" />
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+      --pullquote-bg: rgba(31, 59, 107, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-return {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 32px 0;
+    }
+    .site-return a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 120ms ease;
+    }
+    .site-return a:hover { color: var(--accent); }
+
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 32px 72px;
+    }
+
+    .article-header { margin-bottom: 40px; }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.02em;
+    }
+    .article-meta .kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .article-meta .dot { opacity: 0.6; }
+    .article-header h1 {
+      font-size: 42px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .article-header .deck {
+      font-size: 20px;
+      color: var(--fg-muted);
+      line-height: 1.45;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .article-header .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .article-header .tag-chip {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--fg-subtle);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: color 140ms ease, border-color 140ms ease;
+    }
+    .article-header .tag-chip:hover { color: var(--accent); border-color: var(--accent); }
+    .byline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .byline img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .byline-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.3;
+    }
+    .byline-role {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.3;
+    }
+
+    .article-body p {
+      font-size: 17px;
+      color: var(--fg-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .article-body p strong { color: var(--fg); font-weight: 600; }
+    .article-body p em { color: var(--fg); font-style: italic; }
+    .article-body p.lead {
+      font-size: 20px;
+      color: var(--fg);
+      line-height: 1.5;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .article-body h2 {
+      font-size: 22px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-top: 44px;
+      margin-bottom: 16px;
+    }
+    .article-body h2::before {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 3px;
+      background: var(--accent);
+      margin-bottom: 14px;
+      border-radius: 2px;
+    }
+    .pullquote {
+      border-left: 3px solid var(--accent);
+      background: var(--pullquote-bg);
+      padding: 20px 24px;
+      margin: 32px 0;
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--fg);
+      font-weight: 500;
+      border-radius: 0 8px 8px 0;
+    }
+    .closer {
+      margin-top: 40px;
+      padding: 24px;
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.4;
+      color: var(--fg);
+      font-weight: 600;
+      font-style: italic;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-footer {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .copyright-notice {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .copyright-notice p + p { margin-top: 6px; }
+    .copyright-notice a {
+      color: var(--fg-subtle);
+      text-decoration: underline;
+    }
+    .copyright-notice a:hover { color: var(--accent); }
+    .more-writing {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .more-writing a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .more-writing a:hover { border-bottom-color: var(--accent); }
+
+    @media (max-width: 680px) {
+      .site-return { padding: 20px 20px 0; }
+      article { padding: 24px 20px 48px; }
+      .article-header h1 { font-size: 30px; }
+      .article-header .deck { font-size: 17px; margin-bottom: 24px; }
+      .article-body p.lead { font-size: 18px; }
+      .article-body h2 { font-size: 20px; margin-top: 36px; }
+      .article-body p { font-size: 16px; }
+      .pullquote { font-size: 17px; padding: 16px 18px; margin: 24px 0; }
+      .closer { font-size: 18px; padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-return" aria-label="Site navigation">
+    <a href="index.html">&larr; Writing</a>
+  </nav>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="kicker">AI-Native Practice</span>
+        <span class="dot">&middot;</span>
+        <time datetime="2026-11-10">November 2026</time>
+        <span class="dot">&middot;</span>
+        <span>2 min read</span>
+      </div>
+      <h1>Every PM got a chainsaw. Now what?</h1>
+      <p class="deck">A year of AI across my PM team &mdash; where it worked, where we sawed trees to make toothpicks, and the habit that fixed it.</p>
+      <div class="tag-row" aria-label="Topics">
+        <a class="tag-chip" href="index.html?tag=AI">AI</a>
+        <a class="tag-chip" href="index.html?tag=Frameworks">Frameworks</a>
+        <a class="tag-chip" href="index.html?tag=Team">Team</a>
+        <a class="tag-chip" href="index.html?tag=Discovery">Discovery</a>
+      </div>
+      <div class="byline">
+        <img src="../images/portrait.jpg" alt="Shane Pereira" width="44" height="44" />
+        <div>
+          <div class="byline-name">Shane Pereira</div>
+          <div class="byline-role">Lead Technical Product Manager</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <p class="lead">So early 2026, along with the rest of the world, our organization encouraged us to use AI in our work. Just like most companies, we too had invested heavily into AI and every employee now had access to a hypothetical chainsaw (dramatising for effect). I am going to draw a similarity between AI and a chainsaw. There will be a lot of puns along the way and some of them are intentional.</p>
+
+      <p>Just like a chainsaw, we had no idea as to what and how this would work. See, as Product Managers, we are more like carpenters and less like a lumberjack. We carve out the needs and hammer in the details of our customers so they could use that as a stepping stool to achieve their goals. With chainsaws in our hands and a forest in the views, we set out to carve our needs.</p>
+
+      <h2>Step 1 &mdash; Direction</h2>
+
+      <p>The possibilities are endless and there is a high chance that we don&rsquo;t see the forest for the trees. We needed guidance on what we could do with such a heavy-duty tool. We sat together and decided to start off with the one thing that&rsquo;s marginalised the most &mdash; the instruction manual, AKA documentation. AI gave us the opportunity to get creative with documentation, and since most of us were handed over a product which was new, it gave us an opportunity to learn while we go. Soon came requests to have MCP servers for Confluence, JIRA and Git, which were fulfilled &mdash; unlocking a world where logic could be checked against code.</p>
+
+      <h2>Step 2 &mdash; Outcome</h2>
+
+      <p>With a series of message exchanges, we started carving out documentation in a way where bringing simplicity through images, simulations and interactive input/output cases became a bare minimum in documentation. Multilingual training documents helped unlock a new set of customers. Adoption grew higher and Confluence started to look a lot cleaner.</p>
+
+      <h2>Step 3 &mdash; Refine</h2>
+
+      <p>What we hadn&rsquo;t kept a close eye on was context.</p>
+
+      <div class="pullquote">We were sawing trees to make toothpicks.</div>
+
+      <p>Where we could optimise was in foreseeing what is needed and guiding the agent to achieve exactly that &mdash; a lot like how our customers would feel when describing what they need. As PMs, being able to describe the problem, define the guardrails, and know exactly what the end result would be is something that should come naturally &mdash; but getting there is a process.</p>
+
+      <p>The fix was embarrassingly simple: mind-map before you prompt. The tool goes to work when you can describe the cut &mdash; not every time your hand reaches for it.</p>
+
+      <h2>Step 4 &mdash; Next cut</h2>
+
+      <p>What comes next is a roadmap. You now have the big picture that shows you where there is opportunity and improvements to the product. Build that into a roadmap and feed it as context. Agents do a good job of keeping you honest when they have complete context of what you are trying to achieve &mdash; and also sidetrack less.</p>
+
+      <div class="closer">A chainsaw was designed to replace the axe, not the lumberjack.</div>
+
+    </div>
+
+    <footer class="article-footer">
+      <div class="copyright-notice">
+        <p>&copy; 2026 Shane Pereira. All rights reserved.</p>
+        <p>You may link to and share short excerpts of this piece (under 100 words) with attribution. For reproduction, republishing, or any commercial use, email <a href="mailto:shanepereira05@gmail.com?subject=Permission%20request%20%E2%80%94%20Every%20PM%20got%20a%20chainsaw">shanepereira05@gmail.com</a>. See <a href="../LICENSE">LICENSE</a> for full terms.</p>
+      </div>
+      <nav class="more-writing" aria-label="More">
+        <a href="operating-loop.html">The product operating loop &rarr;</a>
+        <a href="index.html">More writing &rarr;</a>
+        <a href="../index.html">Back to profile &rarr;</a>
+      </nav>
+    </footer>
+
+  </article>
+
+</body>
+</html>
