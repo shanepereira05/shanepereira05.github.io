@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The product operating loop &mdash; Shane Pereira</title>
+  <meta name="description" content="Four stacked loops, not four phases. On discovery, decision, delivery, measurement, and which one goes silent first." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/writing/operating-loop.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The product operating loop" />
+  <meta property="og:description" content="Four stacked loops, not four phases. Where stalled product teams always start." />
+  <meta property="article:author" content="Shane Pereira" />
+  <meta property="article:published_time" content="2026-11-10" />
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+      --pullquote-bg: rgba(31, 59, 107, 0.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --bg-alt: #141414;
+        --fg: #f0f0f0;
+        --fg-muted: #c0c0c0;
+        --fg-subtle: #7a7a7a;
+        --accent: #8fa8d8;
+        --border: #1f1f1f;
+        --border-strong: #2a2a2a;
+        --pullquote-bg: rgba(143, 168, 216, 0.06);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    .site-return {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 32px 0;
+    }
+    .site-return a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 120ms ease;
+    }
+    .site-return a:hover { color: var(--accent); }
+
+    /* Article */
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 32px 72px;
+    }
+
+    .article-header { margin-bottom: 40px; }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.02em;
+    }
+    .article-meta .kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .article-meta .dot {
+      opacity: 0.6;
+    }
+    .article-header h1 {
+      font-size: 42px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .article-header .deck {
+      font-size: 20px;
+      color: var(--fg-muted);
+      line-height: 1.45;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .byline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .byline img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .byline-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.3;
+    }
+    .byline-role {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.3;
+    }
+
+    /* Article body */
+    .article-body p {
+      font-size: 17px;
+      color: var(--fg-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .article-body p strong { color: var(--fg); font-weight: 600; }
+    .article-body p.lead {
+      font-size: 20px;
+      color: var(--fg);
+      line-height: 1.5;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .article-body h2 {
+      font-size: 22px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-top: 44px;
+      margin-bottom: 16px;
+    }
+    .article-body h2::before {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 3px;
+      background: var(--accent);
+      margin-bottom: 14px;
+      border-radius: 2px;
+    }
+    .article-body ul {
+      list-style: none;
+      margin: 0 0 20px 0;
+    }
+    .article-body ul li {
+      font-size: 17px;
+      color: var(--fg-muted);
+      line-height: 1.7;
+      padding-left: 22px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .article-body ul li::before {
+      content: "\2014";
+      position: absolute;
+      left: 0;
+      color: var(--fg-subtle);
+    }
+    .pullquote {
+      border-left: 3px solid var(--accent);
+      background: var(--pullquote-bg);
+      padding: 20px 24px;
+      margin: 32px 0;
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--fg);
+      font-weight: 500;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Article footer */
+    .article-footer {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .copyright-notice {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .copyright-notice p + p { margin-top: 6px; }
+    .copyright-notice a {
+      color: var(--fg-subtle);
+      text-decoration: underline;
+    }
+    .copyright-notice a:hover { color: var(--accent); }
+    .more-writing {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .more-writing a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .more-writing a:hover { border-bottom-color: var(--accent); }
+
+    /* Mobile */
+    @media (max-width: 680px) {
+      .site-return { padding: 20px 20px 0; }
+      article { padding: 24px 20px 48px; }
+      .article-header h1 { font-size: 32px; }
+      .article-header .deck { font-size: 17px; margin-bottom: 24px; }
+      .article-body p.lead { font-size: 18px; }
+      .article-body h2 { font-size: 20px; margin-top: 36px; }
+      .article-body p { font-size: 16px; }
+      .article-body ul li { font-size: 16px; }
+      .pullquote { font-size: 17px; padding: 16px 18px; margin: 24px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-return" aria-label="Site navigation">
+    <a href="../index.html">&larr; Shane Pereira</a>
+  </nav>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="kicker">PM Craft</span>
+        <span class="dot">&middot;</span>
+        <time datetime="2026-11-10">November 2026</time>
+        <span class="dot">&middot;</span>
+        <span>6 min read</span>
+      </div>
+      <h1>The product operating loop</h1>
+      <p class="deck">Four stacked loops, not four phases &mdash; and the one that goes silent first is where stalled product teams always start.</p>
+      <div class="byline">
+        <img src="../images/portrait.jpg" alt="Shane Pereira" width="44" height="44" />
+        <div>
+          <div class="byline-name">Shane Pereira</div>
+          <div class="byline-role">Lead Technical Product Manager</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <p class="lead">Most product organisations describe their work as a sequence &mdash; discover, decide, deliver, measure. That sequence lies. The real shape of product work is four loops stacked on each other, each one capable of blocking the other three. The teams that ship get all four spinning. The teams that stall usually have one loop gone silent, and a lot of noise coming from the other three trying to compensate.</p>
+
+      <h2>Discovery &mdash; the loop that frames the problem</h2>
+
+      <p>Discovery is the most mis-described phase in product management. Most people think of it as &ldquo;user research&rdquo; &mdash; something you do at the start, hand to design, and stop doing. In practice it is the loop that converts a vague business goal (<em>grow conversion, reduce returns, launch in a new market</em>) into a concrete, falsifiable problem worth solving.</p>
+
+      <p>A healthy discovery loop looks like this: you start with a goal. You go talk to the people whose behaviour you need to change. You read the telemetry on what they actually do. You frame three to five candidate problems, each with a sharpened hypothesis. You pick one.</p>
+
+      <p>Common failure mode: the loop gets skipped because the problem seems obvious. Someone has already decided what to build. Discovery becomes a validation exercise for a pre-cooked answer. The team ships; the metric doesn&rsquo;t move; the retro blames execution. The loop was never run.</p>
+
+      <h2>Decision &mdash; the loop that sequences the work</h2>
+
+      <p>Once you have candidate problems and some sense of each one&rsquo;s shape, you have to pick. This is where most prioritisation frameworks (RICE, Kano, MoSCoW, Impact/Effort) live. They are useful but easy to over-rate.</p>
+
+      <p>The actual decision loop looks like this: you rank candidate problems against three things:</p>
+
+      <ul>
+        <li><strong>Capacity</strong> &mdash; do you have the engineering, design, and operator time?</li>
+        <li><strong>Risk</strong> &mdash; what is the worst outcome if this turns out to be wrong?</li>
+        <li><strong>Reversibility</strong> &mdash; if you ship it and it is wrong, how fast can you back it out?</li>
+      </ul>
+
+      <p>You commit to the top one. You explicitly name what you are deferring and why &mdash; this is the part most teams skip, and skipping it is how roadmaps accumulate silent debt.</p>
+
+      <p>The loop closes when every stakeholder with skin in the game knows what was picked, what was not, and the reasoning. Written down. Not in a Slack thread. In a document.</p>
+
+      <h2>Delivery &mdash; the loop that learns from what gets built</h2>
+
+      <p>Delivery is not &ldquo;do what the ticket says.&rdquo; Delivery is a learning loop whose output is new information about whether your decision was right.</p>
+
+      <p>A good delivery loop ships the smallest thing that can disconfirm the hypothesis. Not an MVP in the <em>TechCrunch</em> sense &mdash; an MVP in the scientific sense. If you believe operators will save time with a new layout, the delivery loop ships to one cell, measures, and widens based on evidence. If you believe users will convert better with a new checkout, the delivery loop ships to one country or one cohort.</p>
+
+      <div class="pullquote">The anti-pattern is the Big Launch &mdash; ship everything, flip the switch, hope. Big Launches look confident; they are really an admission that the team did not trust its own decision enough to test it.</div>
+
+      <h2>Measurement &mdash; the loop that tells the honest story</h2>
+
+      <p>The fourth loop closes the first three. It is also the one most consistently broken.</p>
+
+      <p>Measurement is not dashboards. Dashboards are decoration. Measurement is the discipline of answering, in writing, after each shipment, these three questions:</p>
+
+      <ul>
+        <li>What did we expect to happen?</li>
+        <li>What actually happened?</li>
+        <li>What do we now believe that we did not before?</li>
+      </ul>
+
+      <p>If a team cannot answer those three in three paragraphs within two weeks of shipping, they do not have a measurement loop. They have a feature factory with analytics.</p>
+
+      <h2>Where loops go silent</h2>
+
+      <p>Every stalled product team I have worked with had one of these four loops gone silent. The pattern looks like this: a team stops doing discovery, so every problem starts arriving pre-decided. The decision loop then becomes performative &mdash; the real choice was made elsewhere, by whoever was closest to the exec. Delivery becomes order-taking. Measurement stops happening because nobody wants to know the answer.</p>
+
+      <p>The team is still busy. Standups still happen. Features still ship. But the four loops are no longer spinning each other. The product gets slower in exactly the way a flywheel without flow does.</p>
+
+      <h2>Re-opening a stuck loop</h2>
+
+      <p>The good news: you only need to re-open one loop to start the others. My bias is to re-open measurement first, because it is the cheapest to restart. Pick one thing you shipped in the last quarter. Write the three paragraphs &mdash; expected, actual, new belief. Share it. Wait.</p>
+
+      <p>Within a week someone will ask <em>&ldquo;what should we do about that?&rdquo;</em> &mdash; and you have just re-opened discovery. From there the decision and delivery loops reboot on their own.</p>
+
+      <h2>The hiring signal</h2>
+
+      <p>The PM craft is not really about frameworks or templates. It is about keeping four loops spinning at the right pace, calling out when one goes silent, and having the discipline to re-open it before the whole team slows down.</p>
+
+      <div class="pullquote">If you are hiring a PM, ask them which of the four loops is hardest to keep spinning and why. Their answer will tell you more than any case study.</div>
+
+    </div>
+
+    <footer class="article-footer">
+      <div class="copyright-notice">
+        <p>&copy; 2026 Shane Pereira. All rights reserved.</p>
+        <p>You may link to and share short excerpts of this piece (under 100 words) with attribution. For reproduction, republishing, or any commercial use, email <a href="mailto:shanepereira05@gmail.com?subject=Permission%20request%20%E2%80%94%20The%20product%20operating%20loop">shanepereira05@gmail.com</a>. See <a href="../LICENSE">LICENSE</a> for full terms.</p>
+      </div>
+      <nav class="more-writing" aria-label="More">
+        <a href="index.html">More writing &rarr;</a>
+        <a href="../index.html">Back to profile &rarr;</a>
+      </nav>
+    </footer>
+
+  </article>
+
+</body>
+</html>

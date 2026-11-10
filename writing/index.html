@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing &mdash; Shane Pereira</title>
+  <meta name="description" content="Field notes on product management, supply chain, and AI-native product work by Shane Pereira." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/writing/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Writing by Shane Pereira" />
+  <meta property="og:description" content="Short essays on PM craft, warehouse technology, and AI-native product work." />
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --bg-alt: #141414;
+        --fg: #f0f0f0;
+        --fg-muted: #b8b8b8;
+        --fg-subtle: #7a7a7a;
+        --accent: #8fa8d8;
+        --border: #1f1f1f;
+        --border-strong: #2a2a2a;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Back-to-profile nav */
+    .site-return {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 32px 0;
+    }
+    .site-return a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 120ms ease;
+    }
+    .site-return a:hover { color: var(--accent); }
+
+    /* Hero */
+    .writing-hero {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 32px 48px;
+      text-align: center;
+    }
+    .writing-hero .kicker {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .writing-hero h1 {
+      font-size: 44px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .writing-hero .deck {
+      font-size: 19px;
+      color: var(--fg-muted);
+      line-height: 1.5;
+      max-width: 620px;
+      margin: 0 auto 16px;
+    }
+    .writing-hero .meta {
+      font-size: 14px;
+      color: var(--fg-subtle);
+      font-style: italic;
+    }
+    .writing-hero .meta a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .writing-hero .meta a:hover { border-bottom-color: var(--accent); }
+
+    /* Article grid */
+    .article-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px 72px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .article-card {
+      display: block;
+      padding: 24px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--fg);
+      text-decoration: none;
+      transition: border-color 160ms ease, transform 160ms ease;
+      position: relative;
+    }
+    .article-card.published:hover,
+    .article-card.published:focus-visible {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .article-card.coming {
+      opacity: 0.68;
+      cursor: default;
+    }
+    .card-kicker {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .card-title {
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      margin-bottom: 10px;
+    }
+    .card-excerpt {
+      font-size: 14.5px;
+      color: var(--fg-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .card-meta {
+      font-size: 12px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-meta.coming-label {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      font-size: 11px;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 32px 48px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+    }
+    footer.site-footer p + p { margin-top: 6px; }
+    footer.site-footer a {
+      color: var(--fg-subtle);
+      text-decoration: underline;
+    }
+    footer.site-footer a:hover { color: var(--accent); }
+
+    /* Mobile */
+    @media (max-width: 680px) {
+      .site-return { padding: 20px 20px 0; }
+      .writing-hero { padding: 36px 20px 32px; }
+      .writing-hero h1 { font-size: 34px; }
+      .writing-hero .deck { font-size: 16px; }
+      .article-grid { padding: 0 20px 48px; gap: 16px; }
+      footer.site-footer { padding: 24px 20px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-return" aria-label="Site navigation">
+    <a href="../index.html">&larr; Shane Pereira</a>
+  </nav>
+
+  <section class="writing-hero">
+    <p class="kicker">Writing</p>
+    <h1>Field notes on product &amp; supply chain</h1>
+    <p class="deck">Short essays on PM craft, warehouse technology, and AI-native product work &mdash; from an operator&rsquo;s angle.</p>
+    <p class="meta">One new piece roughly every two weeks. <a href="mailto:shanepereira05@gmail.com?subject=Add%20me%20to%20the%20writing%20list">Email me</a> to get them in your inbox.</p>
+  </section>
+
+  <div class="article-grid">
+
+    <a class="article-card published" href="operating-loop.html">
+      <span class="card-kicker">PM Craft</span>
+      <h3 class="card-title">The product operating loop</h3>
+      <p class="card-excerpt">Four stacked loops, not four phases &mdash; and the one that goes silent first is where stalled product teams always start.</p>
+      <div class="card-meta">
+        <time>Nov 2026</time>
+        <span>&middot;</span>
+        <span>6 min read</span>
+      </div>
+    </a>
+
+    <div class="article-card coming" aria-disabled="true">
+      <span class="card-kicker">PM Craft</span>
+      <h3 class="card-title">Reading the lifecycle</h3>
+      <p class="card-excerpt">Every product sits somewhere on the curve. Misreading where it sits is the quiet way most roadmaps go wrong.</p>
+      <div class="card-meta coming-label">Coming soon</div>
+    </div>
+
+    <div class="article-card coming" aria-disabled="true">
+      <span class="card-kicker">AI-Native Practice</span>
+      <h3 class="card-title">What AI does to the PM job</h3>
+      <p class="card-excerpt">LLMs collapse the discovery-to-prototype loop from weeks to hours. What that actually changes about the craft.</p>
+      <div class="card-meta coming-label">Coming soon</div>
+    </div>
+
+    <div class="article-card coming" aria-disabled="true">
+      <span class="card-kicker">Supply Chain</span>
+      <h3 class="card-title">The warehouse floor as a product</h3>
+      <p class="card-excerpt">Why distribution-centre workflows are the most under-estimated PM scope in e-commerce, and how to think about them.</p>
+      <div class="card-meta coming-label">Coming soon</div>
+    </div>
+
+    <div class="article-card coming" aria-disabled="true">
+      <span class="card-kicker">PM Craft</span>
+      <h3 class="card-title">Platform PM: when your customer is another team</h3>
+      <p class="card-excerpt">The job description looks the same but the metrics are different. Adoption, self-serve rate, incident frequency.</p>
+      <div class="card-meta coming-label">Coming soon</div>
+    </div>
+
+    <div class="article-card coming" aria-disabled="true">
+      <span class="card-kicker">PM Craft</span>
+      <h3 class="card-title">Outcomes over outputs: the one-paragraph test</h3>
+      <p class="card-excerpt">Write the hypothesis before the sprint, write the result after, and let the two paragraphs argue in front of the team.</p>
+      <div class="card-meta coming-label">Coming soon</div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Shane Pereira. All rights reserved.</p>
+    <p>All writing, essays, and diagrams are original works protected under copyright. See <a href="../LICENSE">LICENSE</a> for permitted use.</p>
+    <p>Views expressed are my own and do not represent my employer.</p>
+  </footer>
+
+</body>
+</html>
