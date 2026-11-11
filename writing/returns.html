@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why India&rsquo;s biggest D2C margin lever isn&rsquo;t the one everyone&rsquo;s working on &mdash; Shane Pereira</title>
+  <meta name="description" content="Everyone's trying to shift Indian shoppers off COD. That's the wrong problem. Two years of returns data from inside the Indian e-commerce stack." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/writing/returns.html" />
+
+  <!-- Plausible Analytics: pageviews + outbound links + tagged CTA events + file downloads. No cookies, GDPR-exempt. -->
+  <script defer data-domain="shanepereira05.github.io" src="https://plausible.io/js/script.outbound-links.tagged-events.file-downloads.js"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Why India&rsquo;s biggest D2C margin lever isn&rsquo;t the one everyone&rsquo;s working on" />
+  <meta property="og:description" content="Everyone's trying to shift Indian shoppers off COD. That's the wrong problem. Two years of returns data from inside the Indian e-commerce stack." />
+  <meta property="og:image" content="/writing/charts/chart-01-cost-stack.png" />
+  <meta property="article:author" content="Shane Pereira" />
+  <meta property="article:published_time" content="2026-11-11" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why India&rsquo;s biggest D2C margin lever isn&rsquo;t the one everyone&rsquo;s working on" />
+  <meta name="twitter:description" content="Two years of returns data from inside the Indian e-commerce stack." />
+  <meta name="twitter:image" content="/writing/charts/chart-01-cost-stack.png" />
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+      --pullquote-bg: rgba(31, 59, 107, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    .site-return {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 32px 0;
+    }
+    .site-return a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 120ms ease;
+    }
+    .site-return a:hover { color: var(--accent); }
+
+    /* Article shell — wider than the standard 720 to give charts breathing room */
+    article {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 32px 72px;
+    }
+
+    .article-header { margin-bottom: 40px; }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.02em;
+    }
+    .article-meta .kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .article-meta .dot { opacity: 0.6; }
+    .article-header h1 {
+      font-size: 42px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .article-header .deck {
+      font-size: 20px;
+      color: var(--fg-muted);
+      line-height: 1.45;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .article-header .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .article-header .tag-chip {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--fg-subtle);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: color 140ms ease, border-color 140ms ease;
+    }
+    .article-header .tag-chip:hover { color: var(--accent); border-color: var(--accent); }
+    .byline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .byline img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .byline-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.3;
+    }
+    .byline-role {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.3;
+    }
+
+    /* Body */
+    .article-body p {
+      font-size: 17px;
+      color: var(--fg-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .article-body p strong { color: var(--fg); font-weight: 600; }
+    .article-body p em { color: var(--fg); font-style: italic; }
+    .article-body p.lead {
+      font-size: 20px;
+      color: var(--fg);
+      line-height: 1.5;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .article-body h2 {
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-top: 52px;
+      margin-bottom: 16px;
+    }
+    .article-body h2::before {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 3px;
+      background: var(--accent);
+      margin-bottom: 14px;
+      border-radius: 2px;
+    }
+    .article-body h3 {
+      font-size: 17px;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      color: var(--fg);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 36px;
+      margin-bottom: 12px;
+    }
+    .article-body ul {
+      list-style: none;
+      margin: 0 0 20px 0;
+    }
+    .article-body ul li {
+      font-size: 17px;
+      color: var(--fg-muted);
+      line-height: 1.7;
+      padding-left: 22px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .article-body ul li::before {
+      content: "\2014";
+      position: absolute;
+      left: 0;
+      color: var(--fg-subtle);
+    }
+
+    /* Figures — charts with captions */
+    .article-body figure {
+      margin: 36px -40px;        /* break out slightly beyond the text column */
+      background: var(--bg);
+    }
+    .article-body figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .article-body figure figcaption {
+      margin-top: 10px;
+      padding: 0 40px;
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* Pullquote — long-form block quotes from sources (Honasa CFO, Return Prime founder) */
+    .pullquote {
+      border-left: 3px solid var(--accent);
+      background: var(--pullquote-bg);
+      padding: 20px 24px;
+      margin: 32px 0;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--fg);
+      font-weight: 400;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+    .pullquote cite {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+      font-style: normal;
+      color: var(--fg-subtle);
+      font-weight: 500;
+    }
+
+    /* Callout — editorial standout, used for the headline framing */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--pullquote-bg);
+      padding: 20px 24px;
+      margin: 32px 0;
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--fg);
+      font-weight: 500;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Tables — editorial data table convention */
+    .article-body .table-wrap {
+      margin: 28px 0;
+      overflow-x: auto;
+      border-top: 2px solid var(--fg);
+      border-bottom: 1px solid var(--border);
+    }
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+    .article-body table caption {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 0 14px 0;
+    }
+    .article-body table th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--fg);
+      padding: 10px 14px 10px 0;
+      border-bottom: 1px solid var(--border-strong);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .article-body table th:last-child,
+    .article-body table td:last-child { padding-right: 0; }
+    .article-body table th.num,
+    .article-body table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .article-body table td {
+      color: var(--fg-muted);
+      padding: 12px 14px 12px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .article-body table tbody tr:last-child td { border-bottom: none; }
+    .article-body table td strong,
+    .article-body table td b { color: var(--fg); font-weight: 600; }
+
+    /* Sources block at the end */
+    .sources {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+    }
+    .sources h2 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .sources h2::before { content: none; }
+    .sources p { margin-bottom: 10px; font-size: 13.5px; color: var(--fg-subtle); line-height: 1.6; }
+    .sources p strong { color: var(--fg); font-weight: 600; }
+    .sources a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+    .sources a:hover { border-bottom-color: var(--accent); }
+
+    /* Article footer */
+    .article-footer {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .copyright-notice {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .copyright-notice p + p { margin-top: 6px; }
+    .copyright-notice a {
+      color: var(--fg-subtle);
+      text-decoration: underline;
+    }
+    .copyright-notice a:hover { color: var(--accent); }
+    .more-writing {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .more-writing a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .more-writing a:hover { border-bottom-color: var(--accent); }
+
+    /* Mobile */
+    @media (max-width: 760px) {
+      .site-return { padding: 20px 20px 0; }
+      article { padding: 24px 20px 48px; }
+      .article-header h1 { font-size: 30px; }
+      .article-header .deck { font-size: 17px; margin-bottom: 24px; }
+      .article-body p.lead { font-size: 18px; }
+      .article-body h2 { font-size: 21px; margin-top: 40px; }
+      .article-body h3 { font-size: 15px; }
+      .article-body p { font-size: 16px; }
+      .article-body ul li { font-size: 16px; }
+      .article-body figure { margin: 28px -20px; }
+      .article-body figure figcaption { padding: 0 20px; font-size: 12.5px; }
+      .pullquote, .callout { font-size: 16px; padding: 16px 18px; margin: 24px 0; }
+      .article-body table { font-size: 13px; }
+      .article-body table th { font-size: 11px; padding: 8px 10px 8px 0; }
+      .article-body table td { padding: 10px 10px 10px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-return" aria-label="Site navigation">
+    <a href="index.html">&larr; Writing</a>
+  </nav>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="kicker">Commerce &middot; India</span>
+        <span class="dot">&middot;</span>
+        <time datetime="2026-11-11">November 2026</time>
+        <span class="dot">&middot;</span>
+        <span>12 min read</span>
+      </div>
+      <h1>Why India&rsquo;s biggest D2C margin lever isn&rsquo;t the one everyone&rsquo;s working on</h1>
+      <p class="deck">Everyone&rsquo;s trying to shift Indian shoppers off COD. That&rsquo;s the wrong problem. Here&rsquo;s what two years of looking at returns data actually taught me.</p>
+      <div class="tag-row" aria-label="Topics">
+        <a class="tag-chip" href="index.html?tag=Commerce">Commerce</a>
+        <a class="tag-chip" href="index.html?tag=Supply Chain">Supply Chain</a>
+        <a class="tag-chip" href="index.html?tag=Measurement">Measurement</a>
+        <a class="tag-chip" href="index.html?tag=Strategy">Strategy</a>
+      </div>
+      <div class="byline">
+        <img src="../images/portrait.jpg" alt="Shane Pereira" width="44" height="44" />
+        <div>
+          <div class="byline-name">Shane Pereira</div>
+          <div class="byline-role">Lead Technical Product Manager</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <p class="lead">I spent most of last year talking to founders about why their returns line was eating their business. The conversation always goes the same way. You ask what their return rate is. They say 15%. You ask how they calculate it. They say &ldquo;reverse logistics bill divided by orders.&rdquo; You ask whether that bill includes the forward freight on a parcel that got refused at the door, the acquisition cost they&rsquo;d already paid on the customer who refused it, or the GST they can&rsquo;t recover any more.</p>
+
+      <p>Usually it doesn&rsquo;t. Usually nothing beyond the courier invoice. Usually the number the founder is quoting is roughly a quarter of what returns are actually costing them.</p>
+
+      <p>That mismatch is the whole problem. India isn&rsquo;t bad at returns because its logistics are weak &mdash; it&rsquo;s bad at returns because almost no one in the stack is counting them properly. Once you count properly, three things become obvious. One of them is the lever almost nobody is actually pulling.</p>
+
+
+      <h2>What a return really costs</h2>
+
+      <p>Open any typical D2C P&amp;L and you&rsquo;ll find a line called &ldquo;reverse logistics&rdquo; sitting between &#8377;80 and &#8377;120 a parcel. That is the number that gets quoted on panels. It&rsquo;s also incomplete.</p>
+
+      <p>A COD refusal costs you forward freight you can&rsquo;t claw back. Reverse freight to pull the parcel home. Repackaging and QC once it arrives. Inventory sitting blocked while it&rsquo;s in transit. And the one line that rarely gets allocated &mdash; the &#8377;220 to &#8377;660 of marketing spend you paid to acquire the customer who just refused you.</p>
+
+      <figure>
+        <img src="charts/chart-01-cost-stack.png" alt="Bar chart — forward freight ₹80, reverse ₹65, repack ₹30, inventory ₹15, burned CAC ₹440, versus a ₹220 reference line of what P&Ls report" width="1800" height="972" loading="lazy" />
+        <figcaption>Midpoints across ClickPost, Amazon Shipping India, Pure Parcel and Retail Commerce OS. The dashed line is what shows up on most founder dashboards.</figcaption>
+      </figure>
+
+      <p>Stack the lot and an average Indian COD-RTO is costing <strong>&#8377;450 to &#8377;900.</strong> On a &#8377;999 AOV, that&rsquo;s 45% to 90% of a full order going up in smoke every time the parcel comes back unopened.</p>
+
+      <p>The reason the finance team doesn&rsquo;t see this is that the costs live in three different ledgers. Freight sits in operations. CAC sits in marketing. Repackaging and holding costs sit in warehouse ops. The person who could stitch them together is the CFO, and the CFO is looking at a monthly P&amp;L, not a per-parcel teardown.</p>
+
+      <p>Call this the &#8377;120 fiction. Most of the industry still works with it.</p>
+
+
+      <h2>There are actually two problems here</h2>
+
+      <p>A post-delivery return and an RTO look identical on a P&amp;L line. They are nothing alike underneath.</p>
+
+      <p>A post-delivery return is a fit failure. The customer took the parcel in, tried it on, didn&rsquo;t like it, sent it back. The lever is sizing and photography &mdash; a size quiz, a model-is-5&rsquo;8&rsquo;&rsquo;-wearing-M caption, better product shots. Nykaa Fashion worked on this for two years and watched contribution margin crawl from 2.7% to 7.9%. Slow and real.</p>
+
+      <p>An RTO is a commitment failure. The parcel never gets opened. The customer isn&rsquo;t rejecting your product &mdash; they&rsquo;re rejecting the inconvenience of paying for it, in cash, to a courier they weren&rsquo;t expecting, in that moment. A better size chart does nothing for this.</p>
+
+      <figure>
+        <img src="charts/chart-02-rto-causes.png" alt="Donut chart — 65% of Indian RTOs are commitment failures, 22% genuine logistics, 13% fraud or other" width="1800" height="972" loading="lazy" />
+        <figcaption>Share of RTO root causes across Indian e-commerce. Source: GoKwik analysis cited in First Resort.</figcaption>
+      </figure>
+
+      <p>Most of the Indian returns conversation lumps these together, which is why most of the Indian returns conversation ends up recommending things that don&rsquo;t work on the problem you actually have.</p>
+
+
+      <h2>The COD chart that stopped me cold</h2>
+
+      <p>In FY23, the return rate on COD orders in India was <strong>20.9%.</strong> The return rate on prepaid orders was <strong>5.8%.</strong> A 3.6&times; gap. The obvious conclusion: if you can nudge people toward prepaid, you save a lot of money. Every Indian D2C team I&rsquo;ve met in the last four years has had some version of this on a slide deck.</p>
+
+      <figure>
+        <img src="charts/chart-03-cod-vs-prepaid.png" alt="Line chart — COD return rate climbs from 20.9% in FY23 to 58% in festive FY26; prepaid rate hovers in the 2–15% band over the same period" width="1800" height="972" loading="lazy" />
+        <figcaption>Sources: Unicommerce FY23 Ecommerce Index, Unicommerce 2024 Trends, Shipway ShipNotes FY25, Unicommerce India D2C Report 2026.</figcaption>
+      </figure>
+
+      <p>So &mdash; did it work?</p>
+
+      <p>Not really. Three years on, the gap has widened, not closed. COD return rates have gone up, not down. During the festive FY26 quarter (when discounts are deepest and new customers pour in), the COD rate hit 58%. For every 10 parcels you shipped, six came back.</p>
+
+      <p>What this tells me is that when an Indian shopper picks cash on delivery, they&rsquo;re not choosing a payment method. They&rsquo;re buying an option &mdash; specifically, the option to walk away from the deal at the doorstep after they&rsquo;ve had a chance to look at the box. A free option. We just don&rsquo;t think of it in those terms because nobody wrote &ldquo;option value&rdquo; on the checkout button.</p>
+
+      <p>The standard answer is to make prepaid more attractive &mdash; small discount, free shipping, loyalty points. Teams have been trying this for a decade. The gap hasn&rsquo;t moved. I don&rsquo;t think it&rsquo;s going to.</p>
+
+      <p>What has started to work, quietly, is a different approach.</p>
+
+
+      <h2>Pay-later is the lever most teams aren&rsquo;t looking at</h2>
+
+      <p>Here&rsquo;s what I missed for a long time. The real alternative to COD in India isn&rsquo;t prepaid &mdash; it&rsquo;s pay-later. Simpl, LazyPay, Snapmint, ZestMoney. The customer still doesn&rsquo;t part with cash today. But a credit line has been pulled. An NBFC is on the hook. A CIBIL score is in play. The psychological free-walk-away at the door is just gone.</p>
+
+      <figure>
+        <img src="charts/chart-03b-rto-by-payment.png" alt="Horizontal bar chart — COD RTO rate 26%, BNPL/pay-later 7.5%, prepaid UPI/card 2%" width="1800" height="792" loading="lazy" />
+        <figcaption>Sources: Shipway ShipNotes FY25 (COD 26%, prepaid under 2%); PATOYS BNPL benchmark 2026 (BNPL 5&ndash;10%). BNPL numbers lean vendor-reported &mdash; read the range, not the midpoint.</figcaption>
+      </figure>
+
+      <p>The data on BNPL return rates isn&rsquo;t as clean as I&rsquo;d like &mdash; most of it is vendor-reported. But the direction is consistent across every source I&rsquo;ve seen: pay-later parcels come back at roughly a third the rate of COD, closer to prepaid than to COD on the commitment axis. Snapmint&rsquo;s own founder-facing content pitches this openly: BNPL is sold to brands as <em>&ldquo;the way to shift COD customers to committed payment without losing conversion.&rdquo;</em> A 2025 study in the Journal of Informatics Education and Research also found BNPL raises conversion and average basket size at the same time, which rules out some of my initial scepticism that it was just COD in a new jacket.</p>
+
+      <h3>The per-order math</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Payment mode (same &#8377;999 SKU)</th>
+              <th class="num">Return / RTO rate</th>
+              <th class="num">RTO drag per order</th>
+              <th class="num">CM per order shipped</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>COD</td><td class="num">26%</td><td class="num">(&#8377;118)</td><td class="num">&#8377;78</td></tr>
+            <tr><td>BNPL / pay-later</td><td class="num">7.5%</td><td class="num">(&#8377;34)</td><td class="num"><strong>&#8377;162</strong></td></tr>
+            <tr><td>Prepaid (UPI / card)</td><td class="num">2%</td><td class="num">(&#8377;9)</td><td class="num"><strong>&#8377;187</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>BNPL recaptures about 85% of the COD-to-prepaid margin gap, and it does it without asking the customer to pay anything upfront. That last bit matters more than the math on paper suggests, because almost every historical attempt to move Indian shoppers off COD has foundered on exactly that upfront-cash ask.</p>
+
+      <h3>Doesn&rsquo;t the BNPL fee eat the saving?</h3>
+
+      <p>This was my first objection. BNPL providers charge the merchant 2 to 4% plus GST &mdash; higher than UPI&rsquo;s zero MDR, higher than a basic card transaction. Surely that extra fee wipes out whatever you save on RTO?</p>
+
+      <p>I ran the numbers. For short-tenure BNPL (Simpl pay-in-30, LazyPay pay-in-15, Snapmint), it doesn&rsquo;t. Not even close. For long-tenure no-cost EMI, it almost does &mdash; but not quite.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Fee versus RTO saving, per &#8377;999 order</caption>
+          <thead>
+            <tr>
+              <th>Migration path</th>
+              <th class="num">Fee delta</th>
+              <th class="num">RTO saving</th>
+              <th class="num">Net per order</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>COD (&#8377;36) &rarr; UPI direct (&#8377;24)</td><td class="num">&minus;&#8377;12 (cheaper)</td><td class="num">+&#8377;108</td><td class="num"><strong>+&#8377;120</strong></td></tr>
+            <tr><td>COD &rarr; BNPL pay-in-15 via Razorpay</td><td class="num">&minus;&#8377;12 (cheaper)</td><td class="num">+&#8377;83</td><td class="num"><strong>+&#8377;95</strong></td></tr>
+            <tr><td>COD &rarr; BNPL direct (Simpl MDR 3%)</td><td class="num">+&#8377;5</td><td class="num">+&#8377;83</td><td class="num"><strong>+&#8377;78</strong></td></tr>
+            <tr><td>COD &rarr; 6-month no-cost EMI</td><td class="num">+&#8377;25</td><td class="num">+&#8377;83</td><td class="num"><strong>+&#8377;58</strong></td></tr>
+            <tr><td>COD &rarr; 12-month no-cost EMI</td><td class="num">+&#8377;51</td><td class="num">+&#8377;83</td><td class="num"><strong>+&#8377;32</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Fees from Razorpay and Cashfree public rate cards (2026). RTO cost based on 18.5 pp rate reduction &times; &#8377;450 fully-loaded per failed parcel.</p>
+
+      <p>For short-tenure BNPL via a standard gateway, the merchant fee is roughly the same as the COD handling fee. Sometimes lower. So the &#8377;83 you save per order from the RTO reduction is mostly pure margin &mdash; the fee pays for itself around fifteen times over. For long-tenure EMI the subvention gets heavy, the saving shrinks to about 2&times; cover, and only if the RTO rate on your EMI cohort behaves the same way as pay-in-15 (which, on expensive electronics and furniture, it probably won&rsquo;t).</p>
+
+      <h3>The bit I didn&rsquo;t expect</h3>
+
+      <p>What I missed when I first started looking at this is that the RTO saving isn&rsquo;t the biggest part of the BNPL story. It&rsquo;s the smaller half.</p>
+
+      <p>Independent research on Indian BNPL shoppers finds that the AOV lift &mdash; the &ldquo;pain of payment&rdquo; effect &mdash; is roughly the same magnitude as the RTO saving, and it layers on top. A Chennai field study in 2025 (n=350) measured BNPL users spending &#8377;1,840 on average before adoption and &#8377;2,030 after, a 10.3% lift with p&lt;0.05. A Stripe A/B test across 150,000 global checkout sessions found up to 14% revenue lift from BNPL eligibility, combining conversion and basket size. The vendors claim bigger numbers (Cashfree says 40% AOV, Simpl says 30&ndash;40%), but those are self-reported cohorts and I&rsquo;d discount them by 3&times; before using them to plan anything.</p>
+
+      <p>Anchor on the independent 10% AOV lift and the picture compounds:</p>
+
+      <figure>
+        <img src="charts/chart-03b-bnpl-waterfall.png" alt="Column chart — contribution margin per order compounds from ₹78 baseline COD, up to ₹161 after RTO saving, ₹173 with fee neutrality, ₹213 after AOV lift and ₹224 after conversion lift" width="1800" height="972" loading="lazy" />
+        <figcaption>Each bar adds one BNPL effect to the previous. AOV anchor: JSRT 2025 (n=350, p&lt;0.05). Conversion anchor: midpoint of Stripe 150k-session A/B test and LexLocalis MSE panel.</figcaption>
+      </figure>
+
+      <p>Per-order CM goes from &#8377;78 to &#8377;224. Roughly a 2.9&times; lift. And the AOV line alone contributes &#8377;40 per order &mdash; nearly half the value of the RTO saving. Which is why, when you listen to Simpl or Cashfree pitching to a brand, they almost never lead with the RTO reduction. They lead with the AOV lift. Honest selling, actually.</p>
+
+      <p>There is a caveat here I want to be straight about, because I nearly missed it. The same mechanism that lifts AOV (lower pain of payment) also encourages impulse buying. Which means post-delivery returns on BNPL orders tend to run 1 to 3 percentage points higher than prepaid. The net is still clearly positive &mdash; the RTO savings dwarf the impulse-return bump &mdash; but if you only model the flattering half of this, you&rsquo;ll overpromise.</p>
+
+      <h3>Monthly P&amp;L view &mdash; 10,000-orders brand, 60% COD &rarr; 30% COD / 30% BNPL</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>P&amp;L line</th>
+              <th class="num">Baseline</th>
+              <th class="num">Optimised</th>
+              <th class="num">Delta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Monthly orders shipped</td><td class="num">10,000</td><td class="num">10,500 (+5% conv.)</td><td class="num">+500</td></tr>
+            <tr><td>Blended AOV</td><td class="num">&#8377;999</td><td class="num">&#8377;1,029 (BNPL +10%)</td><td class="num">+&#8377;30</td></tr>
+            <tr><td>Gross revenue</td><td class="num">&#8377;99.9 L</td><td class="num">&#8377;1.08 Cr</td><td class="num">+&#8377;8.1 L</td></tr>
+            <tr><td>RTO parcels (blended)</td><td class="num">~1,780 (17.8%)</td><td class="num">~1,165 (11.1%)</td><td class="num">&minus;615</td></tr>
+            <tr><td>RTO fully-loaded cost</td><td class="num">(&#8377;8.0 L)</td><td class="num">(&#8377;5.2 L)</td><td class="num">+&#8377;2.8 L</td></tr>
+            <tr><td>Payment processor fees</td><td class="num">(&#8377;2.9 L)</td><td class="num">(&#8377;3.1 L)</td><td class="num">(&#8377;0.2 L)</td></tr>
+            <tr><td>GST on returns (missed window)</td><td class="num">(&#8377;1.2 L)</td><td class="num">(&#8377;0.5 L)</td><td class="num">+&#8377;0.7 L</td></tr>
+            <tr><td><strong>Operating result</strong></td><td class="num"><strong>&#8377;3.7 L</strong></td><td class="num"><strong>&#8377;15.1 L</strong></td><td class="num"><strong>+&#8377;11.4 L</strong></td></tr>
+            <tr><td>Margin on net revenue</td><td class="num">4.4%</td><td class="num">16.6%</td><td class="num">+1,220 bps</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>That&rsquo;s roughly &#8377;11 lakh of extra operating profit a month, from a payment-mode shift that doesn&rsquo;t cost anything to implement beyond moving the BNPL button above the COD button in the checkout flow. I know of exactly one Indian D2C brand actually doing this at the scale they could. The rest are still running &ldquo;shift to prepaid&rdquo; campaigns that have been failing for a decade.</p>
+
+      <p>The short version: use pay-in-15 BNPL as a COD replacement. Reserve long-tenure no-cost EMI for actual affordability cases (furniture, electronics above &#8377;8,000). The two are completely different products &mdash; conflating them is where most brands get the economics wrong.</p>
+
+
+      <h2>The dual-pricing trick Meesho has been running for four years</h2>
+
+      <p>While we&rsquo;re on levers nobody talks about: Meesho has been running two prices on the same SKU, at checkout, since 2022. One with free returns. One a bit cheaper, no returns allowed. Customer picks.</p>
+
+      <p>Their published numbers are striking. Over 30% of delivered orders opt for the no-return price. That cohort returns around 10% less than the return-eligible cohort. Myntra tried a lighter version of this in 2019, offering up to 4% off for picking &ldquo;non-returnable.&rdquo; Both work. The real design question is: how much of a discount should you actually offer?</p>
+
+      <figure>
+        <img src="charts/chart-03c-no-return-coupon.png" alt="Bar chart — share of shoppers who accept a no-return coupon rises from 32% at 5% off to 45% at 10% off, then barely moves: 48% at 20% off, 50% at 30% off" width="1800" height="864" loading="lazy" />
+        <figcaption>Source: PYMNTS Online Ordering Return Round Trip 2021&ndash;22, cross-referenced against Meesho&rsquo;s 30%+ opt-in at roughly 5&ndash;8% discount.</figcaption>
+      </figure>
+
+      <p>The curve flattens hard after 10%. Every rupee of extra discount beyond that buys you almost no new opt-ins, while giving away full-value revenue on the entire opt-in base. So the correct answer isn&rsquo;t &ldquo;the biggest discount you can afford.&rdquo; It&rsquo;s the smallest one that clears the behavioural threshold. For Indian shoppers that threshold sits around 10%.</p>
+
+      <h3>P&amp;L impact of a 10% no-return coupon at 45% opt-in</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Line (per order shipped, &#8377;999 SKU, 30% baseline return rate)</th>
+              <th class="num">Before</th>
+              <th class="num">After coupon live</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>AOV</td><td class="num">&#8377;999</td><td class="num">&#8377;954 (blended)</td></tr>
+            <tr><td>Opt-in orders (45%)</td><td class="num">&mdash;</td><td class="num">&#8377;899 price, 0% returns</td></tr>
+            <tr><td>Opt-out orders (55%)</td><td class="num">&mdash;</td><td class="num">&#8377;999 price, 30% return rate</td></tr>
+            <tr><td>RTO / return drag</td><td class="num">(&#8377;135)</td><td class="num">(&#8377;74) &mdash; 45% less</td></tr>
+            <tr><td>CM per order shipped</td><td class="num">&#8377;180</td><td class="num"><strong>&#8377;225</strong></td></tr>
+            <tr><td><strong>CM uplift</strong></td><td class="num">&mdash;</td><td class="num"><strong>+25%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The only honest limit worth knowing about this lever comes from Return Prime&rsquo;s founder, who ran these campaigns for a lot of Indian D2C brands:</p>
+
+      <blockquote class="pullquote">
+        &ldquo;Eliminating returns entirely leads to a drop in GMV of up to 50%. Almost 85% of shoppers remain loyal to companies that offer easy returns.&rdquo;
+        <cite>&mdash; Return Prime founder, via trade commentary</cite>
+      </blockquote>
+
+      <p>So the right design is not to kill returns. It&rsquo;s to offer both options, price the difference correctly, and let the customer self-select. Price discrimination, not restriction. Meesho worked this out four years ago and still barely anyone is copying it.</p>
+
+
+      <h2>The fashion category is worse than people admit</h2>
+
+      <p>Everything above is baseline. Fashion is its own problem. The return rate inside apparel has a predictable gradient, and it maps almost exactly to how precisely the garment has to fit a human body.</p>
+
+      <figure>
+        <img src="charts/chart-04-fashion-gradient.png" alt="Horizontal bar chart — Indian fashion return rates climb from 15% for sarees/unstitched to 22% men's casual, 25% kurtis/ethnic, 30% western women's and 35% fitted/footwear" width="1800" height="900" loading="lazy" />
+        <figcaption>Midpoints of Robnu&rsquo;s published benchmark ranges.</figcaption>
+      </figure>
+
+      <p>Which has a practical consequence. The &ldquo;15% returns&rdquo; benchmark the founder brochures like to cite? That&rsquo;s for the saree-and-men&rsquo;s-tee end of the gradient. A women&rsquo;s western wear brand reporting 15% is either understating or structurally exceptional. 30% is honest. 35% is where footwear actually sits.</p>
+
+      <p>I keep coming back to this because the entire pricing assumption for a lot of early-stage apparel D2C brands is built on a 15% return estimate. When the actual number turns out to be 30, the unit economics they modelled at launch don&rsquo;t survive contact with the first full quarter of trading.</p>
+
+
+      <h2>The tax layer almost nobody puts in the model</h2>
+
+      <p>India is the only major e-commerce market I know of where the tax clock starts the day you ship.</p>
+
+      <p>Section 34(2) of the CGST Act sets a hard deadline. A credit note for a returned sale has to be reported on GSTR-1 by <strong>30 November following the end of the financial year</strong> the sale happened in. Miss the window and the 18% output GST you booked on that sale is gone. You&rsquo;ve already refunded the customer. The taxman keeps the GST anyway.</p>
+
+      <h3>The three tax layers a return silently adds</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>What it is</th>
+              <th>Recoverable?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Irrecoverable-GST risk</strong></td>
+              <td>Miss the Section 34(2) window &rarr; output GST becomes sunk cost</td>
+              <td>Only within the window</td>
+            </tr>
+            <tr>
+              <td><strong>TCS reconciliation drag</strong></td>
+              <td>Every return creates a negative TCS entry in GSTR-2B, 1&ndash;2 months later, tracked per AWB</td>
+              <td>TCS yes, staff-time no</td>
+            </tr>
+            <tr>
+              <td><strong>ITC reversal on write-offs</strong></td>
+              <td>Returned units written off &rarr; input tax credit on raw materials must be reversed under Section 17(5)(h)</td>
+              <td>No &mdash; absolute cost</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Sources: CBIC Section 34(2) and Section 17(5)(h); Grant Thornton India GST Compliance Booklet April 2026.</p>
+
+      <div class="callout">
+        A brand doing 10,000 orders a month at 26% COD-RTO (~2,600 RTOs). On a &#8377;999 AOV, half those credit notes miss the window because the reverse logistics cycle takes about five months to close out. That&rsquo;s <strong>&#8377;1.2 lakh of pure GST burn, every month.</strong> Invisible to operations because it lives in the tax ledger, not the logistics one.
+      </div>
+
+      <p>I&rsquo;ve asked three founders about this and none of them had looked at it before. Not because they&rsquo;re careless &mdash; because their CA tracks GST at a GSTR-level aggregate and nobody breaks it down per-RTO. If you can get your finance team to do that one piece of work, you&rsquo;ll probably find you&rsquo;re bleeding somewhere between 100 and 200 basis points of EBITDA you had no idea you were losing.</p>
+
+
+      <h2>What Honasa and Nykaa are quietly telling the market</h2>
+
+      <p>Most listed Indian e-commerce companies bury their return costs inside &ldquo;other operating expenses.&rdquo; Two don&rsquo;t, and reading their disclosures carefully is probably the most useful few hours anyone looking at this industry can spend.</p>
+
+      <h3>Honasa Consumer, Q4 FY25 &mdash; a &#8377;63.5 crore return provision</h3>
+
+      <p>In FY25 Honasa (Mamaearth, The Derma Co.) executed a distribution shift called Project Neev. Returning distributor inventory booked a one-time &#8377;63.5 crore provision. Here is what their CFO Raman Preet Sohi said when asked why the hit was so much larger than the market expected:</p>
+
+      <blockquote class="pullquote">
+        &ldquo;The &#8377;63 crores inventory impact means this is returns coming back to the company&hellip; we make 70% gross margin. So we lose that 70% gross margin on the return inventory. And along with that &hellip; inventory provision &hellip; trade loss related provision &hellip; impacting this close to 10.7% impact from a year-on-year perspective on our EBITDA margins.&rdquo;
+        <cite>&mdash; Raman Preet Sohi, CFO Honasa Consumer, Q4 FY25 analyst call</cite>
+      </blockquote>
+
+      <figure>
+        <img src="charts/chart-05-honasa.png" alt="Grouped bar chart — Honasa Consumer Q4 FY24 vs Q4 FY25: gross margin ticks up from 69.9% to 70.7%, EBITDA margin drops from 7.1% to 5.1%, net profit growth falls from 0% to -18%" width="1800" height="936" loading="lazy" />
+        <figcaption>Source: Honasa Q4 FY25 results &middot; Value Research summary.</figcaption>
+      </figure>
+
+      <p>Gross margin went up. EBITDA margin dropped 200 basis points. Net profit fell 18% despite 13% revenue growth. This is what a return wave looks like when it hits a listed P&amp;L &mdash; the top of the funnel looks healthy and the bottom is quietly collapsing because the return cost shows up a layer down from gross.</p>
+
+      <h3>Nykaa, FY25 &mdash; the beauty-versus-fashion split</h3>
+
+      <p>Nykaa is useful because it runs two businesses inside one company. Beauty, where return rates are 4&ndash;12%. Fashion, where they&rsquo;re 11&ndash;30%. Same CFO. Same ops team. Same cost of capital. Same board.</p>
+
+      <figure>
+        <img src="charts/chart-06-nykaa.png" alt="Bar chart — Nykaa Beauty FY25 EBITDA margin 8.9% vs Nykaa Fashion FY25 at -8.3%, with a dashed breakeven line at 0%" width="1620" height="936" loading="lazy" />
+        <figcaption>Source: FSN E-Commerce FY25 Investor Presentation.</figcaption>
+      </figure>
+
+      <p>A 17-percentage-point gap in EBITDA margin between two segments of the same company. The structural variable that differs between them is the return rate. That&rsquo;s it. Everything else is roughly equal.</p>
+
+      <p>Nykaa Fashion grew 27% YoY and expanded gross margin 419 bps, and still lost 8.3% at EBITDA. Their own analyst-day commitment is that fashion turns EBITDA-breakeven only when contribution margin crosses ~11%, which requires another 300 bps of return reduction from where they are. If they can&rsquo;t get there, the fashion segment has a structural ceiling the market hasn&rsquo;t fully priced yet.</p>
+
+      <p>There isn&rsquo;t a path to profit for Indian fashion e-commerce that doesn&rsquo;t run through the return rate. Everything else is downstream.</p>
+
+
+      <h2>What the recovery data actually shows</h2>
+
+      <p>Between November 2025 and March 2026 a cohort of Indian D2C brands sitting inside Unicommerce&rsquo;s 410M-shipment dataset ran the same three operational changes. Same brands. Same customers. Their RTO rate went from 39.2% to 21% in four months.</p>
+
+      <figure>
+        <img src="charts/chart-07-rto-recovery.png" alt="Area-filled line chart — RTO rate falls from 39.2% in Nov 2025 to 21% by Mar 2026 after three operational fixes land" width="1800" height="936" loading="lazy" />
+        <figcaption>Sources: Unicommerce India D2C Report 2026 (anchor points Nov 2025, Jan 2026, Mar 2026); intermediate months interpolated.</figcaption>
+      </figure>
+
+      <h3>The three fixes, ranked by what I think they move at EBITDA</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fix</th>
+              <th>What it addresses</th>
+              <th>Approx EBITDA uplift</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Prepaid or BNPL incentive at checkout</strong></td>
+              <td>Shifts payment-mode mix &mdash; removes the free-exit option before it exists</td>
+              <td class="num">+400 to +600 bps</td>
+            </tr>
+            <tr>
+              <td><strong>Pin-code courier routing + address verification</strong></td>
+              <td>Cuts the 20&ndash;25% of RTO that is genuinely logistics</td>
+              <td class="num">+150 to +300 bps</td>
+            </tr>
+            <tr>
+              <td><strong>24-hour e-invoice cancel + fast credit-note cycle</strong></td>
+              <td>Protects output GST already booked on returned sales</td>
+              <td class="num">+100 to +200 bps</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The scale of this is embarrassing once you work it out. On a 1,000-orders-per-month brand with 60% COD and 26% COD-RTO, preventing the problem via WhatsApp COD confirmation costs about <strong>&#8377;69 a month.</strong> Processing those same RTOs costs <strong>&#8377;70,000 to &#8377;1.4 lakh a month</strong>, fully loaded. Prevention is roughly a thousand times cheaper than processing, and most brands are still processing.</p>
+
+
+      <h2>The frame</h2>
+
+      <p>Most of the conversation about Indian e-commerce returns starts from the wrong question. The question people keep asking is <em>&ldquo;how do we reduce returns?&rdquo;</em> That leads to blunt answers. Block COD. Shorten the return window. Charge for returns. Kill final-sale discounts.</p>
+
+      <p>All of those make the top line bleed. The better question is narrower, and it&rsquo;s the one I&rsquo;d write on a wall if I were running a D2C brand today:</p>
+
+      <div class="callout">
+        What&rsquo;s the right <strong>returnable option</strong> for each payment mode &times; SKU &times; customer segment, and can we price and enforce it?
+      </div>
+
+      <p>Three concrete illustrations of how different operators have answered that:</p>
+
+      <p>Honasa took a 200 bps EBITDA hit in a single quarter because they couldn&rsquo;t phase a distribution transition cleanly. They still haven&rsquo;t fully recovered. Nykaa Fashion is 300 bps away from EBITDA-breakeven and the lever to close the gap is almost entirely about returns. Myntra, meanwhile, sidestepped the problem by choosing not to hold inventory, pushing the returns cost to the brands on its marketplace, and reported &#8377;548 crore of profit last year.</p>
+
+      <p>Three different answers. One shared question underneath: where should the returns cost sit, and who should pay to prevent it?</p>
+
+      <p>If I had to bet on where this goes next, I&rsquo;d watch three things over the next six to twelve months. Whether Nykaa Fashion&rsquo;s fulfilment line keeps compressing (if it stalls, the apparel D2C ceiling becomes a structural story the market has to price). Whether GSTN tightens Section 34(2) enforcement &mdash; IMS came in last October and credit-note audit volumes are quietly going up. And whether anyone other than Meesho actually copies the dual-pricing checkout. That one still feels like free money sitting on the table for whoever wants to pick it up.</p>
+
+
+      <!-- SOURCES -->
+      <section class="sources" aria-label="Sources">
+        <h2>Sources</h2>
+        <p><strong>Datasets:</strong> <a href="https://unicommerce.com/india-d2c-report-2026-april/" target="_blank" rel="noopener">Unicommerce India D2C Report 2026</a>, <a href="https://bwretailworld.com/retail/fynds-black-friday-2025-report-shows-sharp-rise-in-prepaid-orders" target="_blank" rel="noopener">Fynd Black Friday 2025</a>, <a href="https://www.dhl.com/content/dam/dhl/local/global/dhl-ecommerce/documents/pdf/g0-ecs-insights-country-report-india-2025.pdf" target="_blank" rel="noopener">DHL India E-commerce Insights 2025</a>.</p>
+
+        <p><strong>Cost models:</strong> <a href="https://shipping.amazon.in/blog/what-is-rto-how-to-reduce-return-to-origin" target="_blank" rel="noopener">Amazon Shipping India</a>, <a href="https://topedgeai.com/blog/cod-rto-benchmark-india-2026" target="_blank" rel="noopener">ClickPost / topedgeai</a>, <a href="https://pureparcel.in/blog/reverse-logistics-cost/" target="_blank" rel="noopener">Pure Parcel</a>, <a href="https://dongolabs.com/blog/contribution-margin-per-order-d2c" target="_blank" rel="noopener">Dongolabs</a>.</p>
+
+        <p><strong>Listed filings:</strong> <a href="https://honasa.in/cdn/shop/files/Investor_Call_Transcript_Nov.pdf.pdf" target="_blank" rel="noopener">Honasa Nov 2024 analyst call</a>, <a href="https://www.nykaa.com/media/wysiwyg/uiTools/2025-5/Investor-Presentation-Q4-and-FY25.pdf" target="_blank" rel="noopener">Nykaa FY25 Investor Presentation</a>, <a href="https://www.medianama.com/wp-content/uploads/2025/09/Myntra-FY25.pdf" target="_blank" rel="noopener">Myntra Designs FY25 RoC filing</a>.</p>
+
+        <p><strong>Tax:</strong> <a href="https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/acts/2017_CGST_act/active/chapter7/section34_v1.00.html" target="_blank" rel="noopener">CBIC Section 34 CGST</a>, <a href="https://www.grantthornton.in/globalassets/1.-member-firms/india/assets/pdfs/gst-compliance/gst-compliance-booklet-april-2026.pdf" target="_blank" rel="noopener">Grant Thornton GST Booklet 2026</a>.</p>
+
+        <p><strong>BNPL and no-return coupons:</strong> <a href="https://www.patoys.in/blogs/news/cod-vs-bnpl-india-2026-buy-now-pay-later-cash-on-delivery" target="_blank" rel="noopener">PATOYS COD vs BNPL India 2026</a>, <a href="https://www.snapmintbusiness.com/blogs/reduce-rto-in-e-commerce" target="_blank" rel="noopener">Snapmint &mdash; How to Reduce RTO</a>, <a href="https://www.jier.org/index.php/journal/article/view/3629" target="_blank" rel="noopener">BNPL conversion &amp; retention study &mdash; JIER 2025</a>, <a href="https://medium.com/activated-thinker/how-meesho-outsmarts-e-commerce-returns-with-dual-pricing-a012c7cee095" target="_blank" rel="noopener">Meesho dual-pricing analysis</a>, <a href="https://www.pymnts.com/news/retail/2022/retailers-test-discounting-no-return-policies-to-keep-goods-with-consumers/" target="_blank" rel="noopener">PYMNTS no-return discount research</a>.</p>
+
+        <p><strong>BNPL AOV / conversion lift evidence:</strong> <a href="https://www.jsrtjournal.com/index.php/JSRT/article/download/323/384/382" target="_blank" rel="noopener">JSRT Chennai field study 2025, n=350</a>, <a href="https://stripe.com/blog/testing-the-impact-of-buy-now-pay-later" target="_blank" rel="noopener">Stripe BNPL A/B test, 150,000 sessions</a>, <a href="https://corporate.visa.com/content/dam/VCOM/global/services/documents/vca-global-bnpl-paper.pdf" target="_blank" rel="noopener">Visa Global BNPL Paper</a>, <a href="https://ideas.repec.org/a/pal/jofsma/v30y2025i2d10.1057_s41264-025-00305-y.html" target="_blank" rel="noopener">JSMA BNPL loyalty study India 2025, n=513</a>.</p>
+
+        <p><strong>Payment gateway and merchant fees:</strong> <a href="https://razorpay.com/pricing/" target="_blank" rel="noopener">Razorpay public pricing (2026)</a>, <a href="https://www.cashfree.com/docs/help/account/pricing" target="_blank" rel="noopener">Cashfree pricing</a>, <a href="https://selzix.com/blog/cash-on-delivery-guide-for-indian-sellers" target="_blank" rel="noopener">Shiprocket COD rate card via Selzix</a>.</p>
+      </section>
+
+    </div>
+
+    <footer class="article-footer">
+      <div class="copyright-notice">
+        <p>&copy; 2026 Shane Pereira. All rights reserved.</p>
+        <p>You may link to and share short excerpts of this piece (under 100 words) with attribution. For reproduction, republishing, or any commercial use, email <a href="mailto:shanepereira05@gmail.com?subject=Permission%20request%20%E2%80%94%20D2C%20returns%20in%20India">shanepereira05@gmail.com</a>. See <a href="../LICENSE">LICENSE</a> for full terms.</p>
+        <p>Views expressed are my own and do not represent my employer. No proprietary numbers or internal data from any employer are disclosed in this piece.</p>
+      </div>
+      <nav class="more-writing" aria-label="More">
+        <a href="chainsaw.html">Every PM got a chainsaw &rarr;</a>
+        <a href="operating-loop.html">The product operating loop &rarr;</a>
+        <a href="index.html">More writing &rarr;</a>
+        <a href="../index.html">Back to profile &rarr;</a>
+      </nav>
+    </footer>
+
+  </article>
+
+</body>
+</html>

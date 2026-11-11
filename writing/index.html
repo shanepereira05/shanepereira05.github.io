@@ -8,6 +8,9 @@
   <meta name="author" content="Shane Pereira" />
   <link rel="canonical" href="/writing/" />
 
+  <!-- Plausible Analytics: pageviews + outbound links + tagged CTA events + file downloads. No cookies, GDPR-exempt. -->
+  <script defer data-domain="shanepereira05.github.io" src="https://plausible.io/js/script.outbound-links.tagged-events.file-downloads.js"></script>
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Writing by Shane Pereira" />
   <meta property="og:description" content="Essays on PM craft, warehouse technology, and AI-native product work." />
@@ -485,15 +488,16 @@
       <nav class="rail-nav" aria-label="Section navigation">
         <a href="../index.html">&larr; Profile</a>
         <a href="../advisory/index.html">Advisory</a>
+        <a href="../consultancy/index.html">Consultancy</a>
         <a href="../playbook/index.html">Playbook</a>
         <a href="../resume.pdf" download="Shane_Pereira_Resume.pdf">R&eacute;sum&eacute;</a>
-        <a href="mailto:shanepereira05@gmail.com">Email</a>
+        <a class="plausible-event-name=Writing-Rail-Email" href="mailto:shanepereira05@gmail.com">Email</a>
         <a href="https://in.linkedin.com/in/shane-pereira-535970126" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </nav>
 
       <div class="rail-newsletter">
         <strong>Get essays in your inbox</strong>
-        <a href="mailto:shanepereira05@gmail.com?subject=Add%20me%20to%20the%20writing%20list&amp;body=Please%20add%20me%20to%20the%20writing%20list.">shanepereira05@gmail.com</a>
+        <a class="plausible-event-name=Writing-Newsletter-Subscribe" href="mailto:shanepereira05@gmail.com?subject=Add%20me%20to%20the%20writing%20list&amp;body=Please%20add%20me%20to%20the%20writing%20list.">shanepereira05@gmail.com</a>
         <span class="rail-cadence">New piece roughly every two weeks.</span>
       </div>
     </aside>
@@ -512,12 +516,13 @@
         <span class="filter-label">Filter</span>
         <button type="button" class="filter-chip active" data-tag="all" aria-pressed="true">All <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="AI" aria-pressed="false">AI <span class="count"></span></button>
+        <button type="button" class="filter-chip" data-tag="Commerce" aria-pressed="false">Commerce <span class="count"></span></button>
+        <button type="button" class="filter-chip" data-tag="Supply Chain" aria-pressed="false">Supply Chain <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Discovery" aria-pressed="false">Discovery <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Delivery" aria-pressed="false">Delivery <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Measurement" aria-pressed="false">Measurement <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Frameworks" aria-pressed="false">Frameworks <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Strategy" aria-pressed="false">Strategy <span class="count"></span></button>
-        <button type="button" class="filter-chip" data-tag="Supply Chain" aria-pressed="false">Supply Chain <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Platform" aria-pressed="false">Platform <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Team" aria-pressed="false">Team <span class="count"></span></button>
         <button type="button" class="filter-chip" data-tag="Hiring" aria-pressed="false">Hiring <span class="count"></span></button>
@@ -526,21 +531,21 @@
       <!-- LATEST / FEATURED -->
       <section data-section>
         <div class="section-label">Latest</div>
-        <a class="featured" data-article data-tags="AI,Frameworks,Team,Discovery" href="chainsaw.html">
+        <a class="featured" data-article data-tags="Commerce,Supply Chain,Measurement,Strategy" href="returns.html">
           <div class="meta">
-            <span class="kicker">AI-Native Practice</span>
+            <span class="kicker">Commerce &middot; India</span>
             <span class="dot">&middot;</span>
-            <time datetime="2026-11-10">November 2026</time>
+            <time datetime="2026-11-11">November 2026</time>
             <span class="dot">&middot;</span>
-            <span>2 min read</span>
+            <span>12 min read</span>
           </div>
-          <h2>Every PM got a chainsaw. Now what?</h2>
-          <p class="excerpt">A year of AI across my PM team: where it worked, where we sawed trees to make toothpicks, and the habit that fixed it.</p>
+          <h2>Why India&rsquo;s biggest D2C margin lever isn&rsquo;t the one everyone&rsquo;s working on</h2>
+          <p class="excerpt">Everyone&rsquo;s trying to shift Indian shoppers off COD. That&rsquo;s the wrong problem. Here&rsquo;s what two years of looking at returns data actually taught me &mdash; with the per-parcel math, listed-company filings, and the dual-pricing trick Meesho has been running for four years.</p>
           <div class="tag-chips" aria-label="Topics">
-            <span class="tag-chip">AI</span>
-            <span class="tag-chip">Frameworks</span>
-            <span class="tag-chip">Team</span>
-            <span class="tag-chip">Discovery</span>
+            <span class="tag-chip">Commerce</span>
+            <span class="tag-chip">Supply Chain</span>
+            <span class="tag-chip">Measurement</span>
+            <span class="tag-chip">Strategy</span>
           </div>
           <span class="cta" style="display:block;margin-top:18px;">Read the essay &rarr;</span>
         </a>
@@ -550,6 +555,23 @@
       <section data-section>
         <div class="section-label">Previously</div>
         <div class="post-list">
+          <a class="post-row" data-article data-tags="AI,Frameworks,Team,Discovery" href="chainsaw.html">
+            <div class="meta">
+              <span class="kicker">AI-Native Practice</span>
+              <span class="dot">&middot;</span>
+              <time datetime="2026-11-10">November 2026</time>
+              <span class="dot">&middot;</span>
+              <span>2 min read</span>
+            </div>
+            <h3>Every PM got a chainsaw. Now what?</h3>
+            <p class="excerpt">A year of AI across my PM team: where it worked, where we sawed trees to make toothpicks, and the habit that fixed it.</p>
+            <div class="tag-chips" aria-label="Topics">
+              <span class="tag-chip">AI</span>
+              <span class="tag-chip">Frameworks</span>
+              <span class="tag-chip">Team</span>
+              <span class="tag-chip">Discovery</span>
+            </div>
+          </a>
           <a class="post-row" data-article data-tags="Discovery,Delivery,Measurement,Frameworks" href="operating-loop.html">
             <div class="meta">
               <span class="kicker">PM Craft</span>
