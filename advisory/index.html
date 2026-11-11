@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advisory &mdash; Shane Pereira</title>
+  <meta name="description" content="Shane Pereira takes on 2&ndash;3 advisory engagements at a time. Operator software, zero-to-one PM orgs, AI-native workflow, technical PM hiring." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/advisory/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Advisory &mdash; Shane Pereira" />
+  <meta property="og:description" content="Advisory for early-stage founders building operator software. Equity-first, small retainer, outside my employer's category." />
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+      --ok: #1b7a3b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 72px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    aside.rail {
+      position: sticky;
+      top: 48px;
+    }
+    .rail-portrait {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .rail-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .rail-section {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .rail-tagline {
+      font-size: 13.5px;
+      color: var(--fg-muted);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ok);
+      background: #eef7f0;
+      border: 1px solid #cfe8d6;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+    .availability .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ok);
+    }
+    .rail-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rail-nav a {
+      font-size: 13px;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      transition: color 120ms ease;
+    }
+    .rail-nav a:hover { color: var(--accent); }
+
+    .rail-contact {
+      font-size: 12.5px;
+      color: var(--fg-muted);
+      line-height: 1.55;
+    }
+    .rail-contact strong {
+      display: block;
+      color: var(--fg);
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 13px;
+      letter-spacing: -0.005em;
+    }
+    .rail-contact a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+      font-weight: 500;
+      word-break: break-word;
+    }
+    .rail-contact a:hover { border-bottom-color: var(--accent); }
+    .rail-cadence {
+      display: block;
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: var(--fg-subtle);
+      font-style: italic;
+    }
+
+    /* MAIN */
+    main.content { min-width: 0; }
+
+    .page-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .kicker {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .page-header .deck {
+      font-size: 17px;
+      color: var(--fg-muted);
+      line-height: 1.55;
+      max-width: 580px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--fg-subtle);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 44px 0 20px;
+    }
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    section.block:first-of-type .section-label { margin-top: 0; }
+
+    .block h2 {
+      font-size: 22px;
+      line-height: 1.25;
+      color: var(--fg);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+    .block p {
+      font-size: 15.5px;
+      color: var(--fg-muted);
+      margin-bottom: 14px;
+    }
+    .block p:last-child { margin-bottom: 0; }
+
+    /* Focus cards */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .focus-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      background: var(--bg-alt);
+    }
+    .focus-card h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 8px;
+      letter-spacing: -0.005em;
+    }
+    .focus-card p {
+      font-size: 14px;
+      color: var(--fg-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Syllabus */
+    .syllabus-intro {
+      font-size: 14.5px;
+      color: var(--fg-muted);
+      margin-bottom: 6px;
+    }
+    .syllabus {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      counter-reset: syl;
+    }
+    .syllabus > li {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 20px;
+      padding: 22px 0;
+      border-top: 1px solid var(--border);
+      counter-increment: syl;
+    }
+    .syllabus > li:last-child { border-bottom: 1px solid var(--border); }
+    .syllabus > li::before {
+      content: "M" counter(syl);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      padding-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .syllabus .syl-body { min-width: 0; }
+    .syllabus .syl-theme {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--fg-subtle);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .syllabus h3 {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: -0.005em;
+      margin-bottom: 8px;
+    }
+    .syllabus .syl-blurb {
+      font-size: 14px;
+      color: var(--fg-muted);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .syllabus ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .syllabus ul li {
+      font-size: 13.5px;
+      color: var(--fg-muted);
+      padding: 3px 0 3px 14px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .syllabus ul li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: var(--fg-subtle);
+    }
+    .syllabus-note {
+      font-size: 12.5px;
+      color: var(--fg-subtle);
+      margin-top: 18px;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* "How it works" terms */
+    .terms {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+    .terms li {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14.5px;
+      color: var(--fg-muted);
+    }
+    .terms li:last-child { border-bottom: none; }
+    .terms li strong {
+      color: var(--fg);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Intake block */
+    .intake {
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 28px;
+      background: var(--bg-alt);
+      margin-top: 12px;
+    }
+    .intake h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 10px;
+      letter-spacing: -0.005em;
+    }
+    .intake p {
+      font-size: 14.5px;
+      color: var(--fg-muted);
+      margin-bottom: 14px;
+    }
+    .intake ol {
+      font-size: 14.5px;
+      color: var(--fg-muted);
+      margin: 0 0 20px 22px;
+    }
+    .intake ol li { margin-bottom: 6px; }
+    .intake-cta {
+      display: inline-block;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #ffffff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 140ms ease;
+    }
+    .intake-cta:hover { background: #163058; }
+    .intake-note {
+      margin-top: 14px;
+      font-size: 12.5px;
+      color: var(--fg-subtle);
+      line-height: 1.55;
+    }
+
+    /* FAQ */
+    .faq details {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .faq details[open] { padding-bottom: 18px; }
+    .faq summary {
+      cursor: pointer;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--fg);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      color: var(--fg-subtle);
+      font-size: 18px;
+      font-weight: 400;
+      transition: transform 160ms ease;
+    }
+    .faq details[open] summary::after { content: "\2212"; }
+    .faq p {
+      font-size: 14.5px;
+      color: var(--fg-muted);
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    /* Footer small print */
+    .smallprint {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+    }
+    .smallprint p { margin-bottom: 8px; }
+    .smallprint p:last-child { margin-bottom: 0; }
+
+    /* Links */
+    a { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 32px 22px 56px;
+      }
+      aside.rail {
+        position: static;
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .rail-portrait { margin-bottom: 0; }
+      .availability, .rail-tagline, .rail-nav, .rail-contact { grid-column: 1 / -1; }
+      .rail-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 18px;
+        padding-bottom: 20px;
+      }
+      .focus-grid { grid-template-columns: 1fr; }
+      .terms li { grid-template-columns: 1fr; gap: 4px; }
+      .syllabus > li { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+      .syllabus > li::before { padding-top: 0; }
+      .page-header h1 { font-size: 28px; }
+      .page-header .deck { font-size: 15.5px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- SIDEBAR -->
+    <aside class="rail" aria-label="Advisory section sidebar">
+      <img class="rail-portrait" src="../images/portrait.jpg" alt="Shane Pereira" width="88" height="88" />
+      <div class="rail-name">Shane Pereira</div>
+      <span class="rail-section">Advisory</span>
+      <p class="rail-tagline">Advisory for founders building software for operators. Done in my personal capacity, outside my employer&rsquo;s category.</p>
+
+      <div class="availability">
+        <span class="dot" aria-hidden="true"></span>
+        Taking on 1 new engagement in Q1 2027
+      </div>
+
+      <nav class="rail-nav" aria-label="Section navigation">
+        <a href="../index.html">&larr; Profile</a>
+        <a href="../writing/index.html">Writing</a>
+        <a href="../playbook/index.html">Playbook</a>
+        <a href="../resume.pdf" download="Shane_Pereira_Resume.pdf">R&eacute;sum&eacute;</a>
+        <a href="https://in.linkedin.com/in/shane-pereira-535970126" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
+
+      <div class="rail-contact">
+        <strong>Direct line</strong>
+        <a href="mailto:shanepereira05@gmail.com?subject=Advisory%20inquiry">shanepereira05@gmail.com</a>
+        <span class="rail-cadence">I reply to every inquiry within 7 days.</span>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="content">
+
+      <header class="page-header">
+        <span class="kicker">Advisory</span>
+        <h1>I take on 2&ndash;3 advisory engagements at a time.</h1>
+        <p class="deck">Outside my employer&rsquo;s category. Equity-first, small retainer. If you&rsquo;re building software for operators and you want a second set of eyes from someone who&rsquo;s shipped at scale, I might be useful.</p>
+      </header>
+
+      <!-- WHAT I HELP WITH -->
+      <section class="block">
+        <div class="section-label">What I help with</div>
+        <h2>Four problem shapes where I add the most value.</h2>
+        <p>If what you&rsquo;re working on looks like one of these, we should talk. If it doesn&rsquo;t, I&rsquo;ll usually say so in the first email and point you at someone better suited.</p>
+
+        <div class="focus-grid">
+          <div class="focus-card">
+            <h3>Zero-to-one PM org</h3>
+            <p>Hiring your first PMs, writing the first real roadmap, standing up discovery and measurement loops that survive the next head-count cycle.</p>
+          </div>
+          <div class="focus-card">
+            <h3>Operator software</h3>
+            <p>Products where the end user is doing a job, not killing time. Dispatch, fulfillment, back-office, field ops, workflow tools. A messy design space most consumer PMs haven&rsquo;t had to sit in.</p>
+          </div>
+          <div class="focus-card">
+            <h3>AI-native PM workflow</h3>
+            <p>How to actually use LLMs and MCP tooling inside your product org. Drafting specs, reading hundreds of tickets at once, cutting the discovery cycle from weeks to days &mdash; without shipping plausible-looking rubbish.</p>
+          </div>
+          <div class="focus-card">
+            <h3>Technical PM hiring &amp; ramp</h3>
+            <p>What the role is really for, what to screen on, and how to tell a junior tech PM from a senior one in a 45-minute interview. Includes the first 90 days of any hire you make.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SYLLABUS -->
+      <section class="block">
+        <div class="section-label">Syllabus</div>
+        <h2>What a typical three months looks like.</h2>
+        <p class="syllabus-intro">Three months is tight on purpose. We scope hard in the first week to the two or three things that matter most for you, then run them end to end. What&rsquo;s below is the full menu &mdash; not every box gets ticked, and that&rsquo;s the point.</p>
+
+        <ol class="syllabus">
+          <li>
+            <div class="syl-body">
+              <span class="syl-theme">Discovery &amp; problem</span>
+              <h3>Making sure we&rsquo;re solving the right thing, then moving fast to a prototype worth showing.</h3>
+              <p class="syl-blurb">Week one is about the real problem, not the described one. The rest of the month is about collapsing the distance from &ldquo;we understand it&rdquo; to &ldquo;we have a thing in front of an operator.&rdquo;</p>
+              <ul>
+                <li>Operator interview protocol &mdash; watching the person work, not asking them to describe it</li>
+                <li>Problem statement rewritten in two paragraphs, without jargon</li>
+                <li>Using LLMs and MCP tooling to collapse discovery-to-prototype from weeks to days, concretely with your stack</li>
+                <li>Three things we&rsquo;re explicitly <em>not</em> building this quarter, named out loud</li>
+              </ul>
+            </div>
+          </li>
+
+          <li>
+            <div class="syl-body">
+              <span class="syl-theme">Measurement &amp; prioritisation</span>
+              <h3>Closing the loop on what you ship, and building the mechanism that decides what comes next.</h3>
+              <p class="syl-blurb">The two gaps I see most often at seed and Series A. One stops you learning from what you shipped. The other means the roadmap is whoever shouted loudest last week.</p>
+              <ul>
+                <li>Picking three outcome metrics (and killing the vanity ones)</li>
+                <li>Instrumentation audit &mdash; what&rsquo;s not being measured that should be</li>
+                <li>Lightweight intake process for a 5&ndash;15 person product team</li>
+                <li>Opportunity cost framing &mdash; naming what gets deferred in the same paragraph as what gets built</li>
+              </ul>
+            </div>
+          </li>
+
+          <li>
+            <div class="syl-body">
+              <span class="syl-theme">Team, cadence &amp; renewal</span>
+              <h3>Making the next PM hire land, standing up habits that outlast the engagement, and deciding what&rsquo;s next.</h3>
+              <p class="syl-blurb">The last month shifts from new material to durability. What keeps running after I stop coming to the calls. And whether we both want to keep going.</p>
+              <ul>
+                <li>The role you actually have, written down &mdash; not the generic &ldquo;PM&rdquo; job description</li>
+                <li>Interview loop that screens for judgement over trivia, plus a 90-day ramp plan the new hire reads on day one</li>
+                <li>Weekly, monthly and quarterly rhythm, written down and defended</li>
+                <li>Review and decide: renew for another three months, pause, or wrap cleanly</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <p class="syllabus-note">The syllabus is a menu and a map, not a contract. We agree in week one which modules we&rsquo;re actually doing and in what order. Renewals almost always add the modules we skipped.</p>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="block">
+        <div class="section-label">How it works</div>
+        <h2>The shape of a typical engagement.</h2>
+        <p>Light-touch by design. Nothing about this is meant to feel like a second job for either of us.</p>
+        <ul class="terms">
+          <li><strong>Cadence</strong><span>Two 45-minute calls a month, plus async over email or Slack as things come up. Written notes shared in a running doc that you own.</span></li>
+          <li><strong>Duration</strong><span>Three months to start. Renewable in three-month blocks if we both want to keep going. Deliberately short so neither of us is stuck in a long contract that stopped working two months in.</span></li>
+          <li><strong>Compensation</strong><span>Equity-first for seed and Series A (typically 0.1&ndash;0.25% vesting over 2 years with a 3-month cliff &mdash; the first engagement <em>is</em> the cliff, so it also functions as a trial for both sides). Small cash retainer for Series B and later, where the equity maths stops working.</span></li>
+          <li><strong>Confidentiality</strong><span>Everything you share stays with me. Nothing from your business ends up in my writing or talks without an explicit, written sign-off from you.</span></li>
+          <li><strong>Scope</strong><span>Advice, framing, hard questions, the occasional spec review. I don&rsquo;t do interim roles, don&rsquo;t manage people, and don&rsquo;t write code for you.</span></li>
+        </ul>
+      </section>
+
+      <!-- INTAKE -->
+      <section class="block">
+        <div class="section-label">How to apply</div>
+        <h2>Three questions, one email.</h2>
+        <p>Instead of a form, I ask you to write me a short email. The answers tell me more about fit than any intake form would.</p>
+
+        <div class="intake">
+          <h3>Please cover these, in any order:</h3>
+          <ol>
+            <li>What are you building, in two short paragraphs. Who is it for, and what&rsquo;s the current stage.</li>
+            <li>What does an &ldquo;advice from Shane&rdquo; shaped problem look like for you right now. Be specific.</li>
+            <li>Who else is advising you today. Names, or &ldquo;no one yet,&rdquo; both fine.</li>
+          </ol>
+          <a class="intake-cta" href="mailto:shanepereira05@gmail.com?subject=Advisory%20inquiry&amp;body=Hi%20Shane%2C%0A%0A1.%20What%20we%27re%20building%3A%0A%0A2.%20Where%20I%20could%20help%3A%0A%0A3.%20Current%20advisors%3A%0A%0AThanks%2C%0A">Write me the email</a>
+          <p class="intake-note">I read every one and reply within 7 days. If it&rsquo;s not a fit I&rsquo;ll usually suggest one or two other people who might be.</p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="block faq">
+        <div class="section-label">Common questions</div>
+        <h2>Things people ask before writing in.</h2>
+
+        <details>
+          <summary>Why advisory and not fractional / interim PM?</summary>
+          <p>I have a full-time job I enjoy. Fractional work would mean leaving it or doing it badly. Advisory is honest about the two-hour-a-month ceiling and prices that way.</p>
+        </details>
+
+        <details>
+          <summary>What stage of company do you work best with?</summary>
+          <p>Seed through Series B. Before seed you don&rsquo;t need advisors yet, you need to go talk to users. After Series B you need people who can commit real hours, which I can&rsquo;t.</p>
+        </details>
+
+        <details>
+          <summary>Do you take cash-only engagements?</summary>
+          <p>Only at Series B and later, where the equity maths stops making sense. For earlier stages, the equity grant is the entire point &mdash; it&rsquo;s what keeps my incentives aligned with yours.</p>
+        </details>
+
+        <details>
+          <summary>Can you introduce me to people in your network?</summary>
+          <p>Yes, within reason and only after we&rsquo;ve worked together long enough that I can vouch for what you&rsquo;re doing. I treat intros as reputation currency and I spend it carefully.</p>
+        </details>
+
+        <details>
+          <summary>Where are you based and what time zones do you work across?</summary>
+          <p>Bangalore (IST). I regularly take calls with Europe (morning IST) and the US West Coast (late evening IST). US East Coast is harder but manageable.</p>
+        </details>
+
+        <details>
+          <summary>Will this appear anywhere public?</summary>
+          <p>I don&rsquo;t publish a client list. If you&rsquo;d like a public mention on your &ldquo;Advisors&rdquo; page I&rsquo;ll usually say yes, but I won&rsquo;t surface it from my end without your explicit ask.</p>
+        </details>
+      </section>
+
+      <!-- SMALL PRINT -->
+      <div class="smallprint">
+        <p>All advisory work is done in my personal capacity, outside working hours, and strictly in domains that do not compete with my employer. Nothing on this page is affiliated with, authorised by, or endorsed by Nike or any prior employer.</p>
+        <p>Engagement terms are indicative. Final terms are set out in a short written agreement before any work starts.</p>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>

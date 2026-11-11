@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI-Native PM Playbook &mdash; Shane Pereira</title>
+  <meta name="description" content="A field-tested playbook for product managers using LLMs and MCP tooling inside real product orgs. 25+ prompts, workflows, and failure modes to avoid." />
+  <meta name="author" content="Shane Pereira" />
+  <link rel="canonical" href="/playbook/" />
+
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content="The AI-Native PM Playbook" />
+  <meta property="og:description" content="Prompts, patterns and practice for PMs who want to actually use AI inside their product org \u2014 without shipping plausible-looking rubbish." />
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-alt: #fafafa;
+      --fg: #111111;
+      --fg-muted: #4a4a4a;
+      --fg-subtle: #7a7a7a;
+      --accent: #1f3b6b;
+      --accent-strong: #163058;
+      --border: #eaeaea;
+      --border-strong: #d8d8d8;
+      --ok: #1b7a3b;
+      --warn: #8a6d0a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      color: var(--fg);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 72px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    aside.rail { position: sticky; top: 48px; }
+    .rail-portrait {
+      width: 88px; height: 88px;
+      border-radius: 50%; object-fit: cover;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .rail-name {
+      font-size: 18px; font-weight: 700;
+      color: var(--fg); letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .rail-section {
+      display: inline-block;
+      font-size: 10.5px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .rail-tagline {
+      font-size: 13.5px; color: var(--fg-muted);
+      line-height: 1.55; margin-bottom: 20px;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center;
+      gap: 8px; padding: 6px 11px;
+      font-size: 11.5px; font-weight: 600;
+      color: var(--warn);
+      background: #fdf8ea;
+      border: 1px solid #ecdfae;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+    .status-pill .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--warn);
+    }
+    .rail-nav {
+      display: flex; flex-direction: column;
+      gap: 8px; margin-bottom: 28px;
+      padding-bottom: 24px; border-bottom: 1px solid var(--border);
+    }
+    .rail-nav a {
+      font-size: 13px; color: var(--fg-subtle);
+      text-decoration: none; transition: color 120ms ease;
+    }
+    .rail-nav a:hover { color: var(--accent); }
+    .rail-contact { font-size: 12.5px; color: var(--fg-muted); line-height: 1.55; }
+    .rail-contact strong {
+      display: block; color: var(--fg);
+      font-weight: 600; margin-bottom: 6px;
+      font-size: 13px; letter-spacing: -0.005em;
+    }
+    .rail-contact a {
+      color: var(--accent); text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+      font-weight: 500; word-break: break-word;
+    }
+    .rail-contact a:hover { border-bottom-color: var(--accent); }
+
+    /* MAIN */
+    main.content { min-width: 0; }
+
+    .hero {
+      padding-bottom: 36px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero .kicker {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 42px; line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--fg); font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .hero .deck {
+      font-size: 17.5px; color: var(--fg-muted);
+      line-height: 1.5; max-width: 620px;
+      margin-bottom: 28px;
+    }
+    .hero .price-row {
+      display: flex; align-items: center;
+      gap: 18px; flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .hero .price {
+      font-size: 32px; font-weight: 800;
+      color: var(--fg); letter-spacing: -0.015em;
+      font-variant-numeric: tabular-nums;
+    }
+    .hero .price .strike {
+      font-size: 18px; color: var(--fg-subtle);
+      text-decoration: line-through;
+      font-weight: 500; margin-right: 8px;
+    }
+    .hero .price-note {
+      font-size: 13px; color: var(--fg-subtle);
+    }
+    .hero .cta-row {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      align-items: center;
+    }
+    .cta-primary {
+      display: inline-block;
+      padding: 13px 22px;
+      font-size: 14px; font-weight: 700;
+      color: #ffffff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.005em;
+      transition: background-color 140ms ease;
+    }
+    .cta-primary:hover { background: var(--accent-strong); }
+    .cta-secondary {
+      display: inline-block;
+      padding: 13px 22px;
+      font-size: 14px; font-weight: 600;
+      color: var(--fg);
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 140ms ease;
+    }
+    .cta-secondary:hover { border-color: var(--fg-subtle); }
+    .hero .cta-sub {
+      font-size: 12.5px; color: var(--fg-subtle);
+      margin-top: 14px;
+    }
+
+    /* Section */
+    .section-label {
+      display: flex; align-items: center;
+      gap: 12px;
+      font-size: 11px; font-weight: 700;
+      color: var(--fg-subtle); letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 48px 0 20px;
+    }
+    .section-label::after {
+      content: ""; flex: 1; height: 1px;
+      background: var(--border);
+    }
+    section.block:first-of-type .section-label { margin-top: 0; }
+
+    .block h2 {
+      font-size: 24px; line-height: 1.22;
+      color: var(--fg); font-weight: 700;
+      letter-spacing: -0.012em; margin-bottom: 14px;
+    }
+    .block > p {
+      font-size: 15.5px; color: var(--fg-muted);
+      margin-bottom: 14px;
+    }
+    .block > p:last-of-type { margin-bottom: 0; }
+
+    /* Who it's for */
+    .audience {
+      list-style: none; padding: 0; margin: 18px 0 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .audience li {
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-alt);
+      font-size: 14.5px; color: var(--fg-muted);
+      line-height: 1.55;
+    }
+    .audience li strong {
+      display: block; color: var(--fg);
+      font-weight: 700; margin-bottom: 6px;
+      font-size: 13.5px; letter-spacing: -0.005em;
+    }
+
+    /* What's inside - ToC */
+    .toc {
+      list-style: none; padding: 0; margin: 18px 0 0;
+      counter-reset: mod;
+    }
+    .toc > li {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 18px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      counter-increment: mod;
+    }
+    .toc > li:last-child { border-bottom: 1px solid var(--border); }
+    .toc > li::before {
+      content: counter(mod, decimal-leading-zero);
+      font-size: 13px; font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+      padding-top: 2px;
+    }
+    .toc .mod-body { min-width: 0; }
+    .toc h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--fg); letter-spacing: -0.005em;
+      margin-bottom: 6px;
+    }
+    .toc .mod-pages {
+      font-size: 11.5px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.05em;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 8px;
+    }
+    .toc p {
+      font-size: 14px; color: var(--fg-muted);
+      line-height: 1.55;
+    }
+
+    /* Deliverables */
+    .deliverables {
+      list-style: none; padding: 0; margin: 10px 0 0;
+    }
+    .deliverables li {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 14px;
+      font-size: 14.5px; color: var(--fg-muted);
+      line-height: 1.55;
+    }
+    .deliverables li:last-child { border-bottom: none; }
+    .deliverables li::before {
+      content: "\2713";
+      color: var(--ok);
+      font-weight: 700;
+      font-size: 14px;
+      padding-top: 1px;
+    }
+    .deliverables li strong {
+      color: var(--fg); font-weight: 600;
+    }
+
+    /* Author */
+    .author-card {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-alt);
+      margin-top: 10px;
+    }
+    .author-card img {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .author-card h3 {
+      font-size: 15px; font-weight: 700;
+      color: var(--fg); margin-bottom: 4px;
+    }
+    .author-card .author-role {
+      font-size: 12px; color: var(--fg-subtle);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 8px; font-weight: 600;
+    }
+    .author-card p {
+      font-size: 14px; color: var(--fg-muted);
+      line-height: 1.55;
+    }
+
+    /* Waitlist block */
+    .waitlist {
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 28px;
+      background: var(--bg-alt);
+      margin-top: 12px;
+    }
+    .waitlist h3 {
+      font-size: 17px; font-weight: 700;
+      color: var(--fg); margin-bottom: 10px;
+      letter-spacing: -0.005em;
+    }
+    .waitlist p {
+      font-size: 14.5px; color: var(--fg-muted);
+      margin-bottom: 18px; line-height: 1.55;
+    }
+    .waitlist .perks {
+      list-style: none; padding: 0;
+      margin: 0 0 20px;
+      font-size: 13.5px; color: var(--fg-muted);
+    }
+    .waitlist .perks li {
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    .waitlist .perks li::before {
+      content: "\2014";
+      position: absolute; left: 0;
+      color: var(--fg-subtle);
+    }
+
+    /* FAQ */
+    .faq details {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .faq details[open] { padding-bottom: 18px; }
+    .faq summary {
+      cursor: pointer;
+      font-size: 14.5px; font-weight: 600;
+      color: var(--fg);
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      color: var(--fg-subtle);
+      font-size: 18px; font-weight: 400;
+    }
+    .faq details[open] summary::after { content: "\2212"; }
+    .faq p {
+      font-size: 14.5px; color: var(--fg-muted);
+      margin-top: 10px; margin-bottom: 0;
+      line-height: 1.55;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      margin-top: 48px;
+      padding: 32px;
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      background: var(--fg);
+      color: #ffffff;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: 22px; font-weight: 700;
+      color: #ffffff; margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .final-cta p {
+      font-size: 14.5px; color: #cfcfcf;
+      margin-bottom: 20px; line-height: 1.55;
+    }
+    .final-cta .cta-primary {
+      background: #ffffff; color: var(--fg);
+      border-color: #ffffff;
+    }
+    .final-cta .cta-primary:hover {
+      background: #e8e8e8;
+    }
+
+    /* Small print */
+    .smallprint {
+      margin-top: 44px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--fg-subtle);
+      line-height: 1.6;
+    }
+    .smallprint p { margin-bottom: 8px; }
+    .smallprint p:last-child { margin-bottom: 0; }
+
+    a { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 32px 22px 56px;
+      }
+      aside.rail {
+        position: static;
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .rail-portrait { margin-bottom: 0; }
+      .status-pill, .rail-tagline, .rail-nav, .rail-contact { grid-column: 1 / -1; }
+      .rail-nav {
+        flex-direction: row; flex-wrap: wrap;
+        gap: 18px; padding-bottom: 20px;
+      }
+      .hero h1 { font-size: 30px; }
+      .hero .deck { font-size: 15.5px; }
+      .audience { grid-template-columns: 1fr; }
+      .toc > li { grid-template-columns: 1fr; gap: 6px; padding: 16px 0; }
+      .toc > li::before { padding-top: 0; }
+      .author-card { grid-template-columns: 1fr; text-align: left; }
+      .author-card img { width: 64px; height: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- SIDEBAR -->
+    <aside class="rail" aria-label="Playbook sidebar">
+      <img class="rail-portrait" src="../images/portrait.jpg" alt="Shane Pereira" width="88" height="88" />
+      <div class="rail-name">Shane Pereira</div>
+      <span class="rail-section">Playbook</span>
+      <p class="rail-tagline">A field-tested guide to doing PM work with AI as a serious tool, not a toy. Written from inside the job.</p>
+
+      <div class="status-pill">
+        <span class="dot" aria-hidden="true"></span>
+        Launching January 2027
+      </div>
+
+      <nav class="rail-nav" aria-label="Section navigation">
+        <a href="../index.html">&larr; Profile</a>
+        <a href="../writing/index.html">Writing</a>
+        <a href="../advisory/index.html">Advisory</a>
+        <a href="../resume.pdf" download="Shane_Pereira_Resume.pdf">R&eacute;sum&eacute;</a>
+      </nav>
+
+      <div class="rail-contact">
+        <strong>Questions?</strong>
+        <a href="mailto:shanepereira05@gmail.com?subject=Playbook%20question">shanepereira05@gmail.com</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="content">
+
+      <!-- HERO -->
+      <header class="hero">
+        <span class="kicker">The AI-Native PM Playbook</span>
+        <h1>Doing PM work with AI as a serious tool, not a toy.</h1>
+        <p class="deck">Prompts, patterns and practice from a year of running AI-native workflows across a real product team. No hype, no slop. Just the stuff that actually made us faster &mdash; and the places it quietly made us worse.</p>
+
+        <div class="price-row">
+          <div class="price">
+            <span class="strike">$49</span>$39
+          </div>
+          <span class="price-note">Early-bird price &mdash; first 100 waitlist subscribers only.</span>
+        </div>
+
+        <div class="cta-row">
+          <a class="cta-primary" href="#waitlist">Join the waitlist</a>
+          <a class="cta-secondary" href="#inside">See what&rsquo;s inside</a>
+        </div>
+        <p class="cta-sub">One-time purchase &middot; PDF + Notion template &middot; 14-day refund, no questions asked.</p>
+      </header>
+
+      <!-- WHO IT'S FOR -->
+      <section class="block">
+        <div class="section-label">Who it&rsquo;s for</div>
+        <h2>You&rsquo;ll get real value if you&rsquo;re one of these four people.</h2>
+        <p>It&rsquo;s a playbook, not an intro course. Written for PMs who already know what a PRD is and want to do that work faster and more honestly.</p>
+        <ul class="audience">
+          <li><strong>The curious senior PM.</strong> You&rsquo;ve tried ChatGPT for a few things. It works for some, flops for others. You want the pattern behind what works.</li>
+          <li><strong>The product lead feeling behind.</strong> Your team is split: a few PMs using AI heavily, a few resisting. You need a shared vocabulary and a credible point of view.</li>
+          <li><strong>The solo founder-PM.</strong> You&rsquo;re doing a PM team&rsquo;s worth of work alone. AI is your leverage multiplier. You want the sharpest version of that leverage.</li>
+          <li><strong>The staff/principal who&rsquo;s been around.</strong> You&rsquo;ve seen hype cycles. You want to know what&rsquo;s actually different this time, in concrete work-day terms.</li>
+        </ul>
+      </section>
+
+      <!-- WHAT'S INSIDE -->
+      <section class="block" id="inside">
+        <div class="section-label">What&rsquo;s inside</div>
+        <h2>Seven modules, built around the actual week of a PM.</h2>
+        <p>Every module is written to be applied the same day you read it. No frameworks for the sake of frameworks. Each one includes the exact prompts, the gotchas, and the before/after of a real example from my own work.</p>
+
+        <ol class="toc">
+          <li>
+            <div class="mod-body">
+              <h3>The frame: what AI-native PM actually means</h3>
+              <div class="mod-pages">6 pages &middot; 10 minutes</div>
+              <p>The working definition I use with my team, plus the three things it specifically does <em>not</em> mean. Reading this first makes the rest of the book land harder.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mod-body">
+              <h3>Discovery, compressed</h3>
+              <div class="mod-pages">11 pages &middot; 25 minutes</div>
+              <p>Reading 200 Jira tickets in five minutes. LLM-assisted competitive research without hallucinated metrics. The MCP setup that reads across your Jira, Confluence and Slack in one prompt.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mod-body">
+              <h3>Writing specs with AI</h3>
+              <div class="mod-pages">14 pages &middot; 30 minutes</div>
+              <p>The PRD scaffolding prompt I use every week. The &ldquo;sharpen my thinking&rdquo; prompt that catches gaps before engineering review. Four failure modes to watch for, with the fix for each.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mod-body">
+              <h3>Measurement &amp; telemetry</h3>
+              <div class="mod-pages">9 pages &middot; 20 minutes</div>
+              <p>Interpreting dashboards with an LLM as a sanity check, not a crutch. The &ldquo;why is this metric moving&rdquo; workflow. The failure mode where AI confidently invents a cause.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mod-body">
+              <h3>Decision support</h3>
+              <div class="mod-pages">8 pages &middot; 18 minutes</div>
+              <p>Scenario modelling as prompts. Prioritisation framework for a team where some work is AI-accelerated and some isn&rsquo;t. How to keep opportunity cost honest.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mod-body">
+              <h3>The prompt library</h3>
+              <div class="mod-pages">25+ prompts &middot; copy-paste ready</div>
+              <p>Every prompt I actually use in a given week, grouped by what it&rsquo;s for. Battle-tested, not generated. Comes as a Notion template you can fork and edit.</p>
+            </div>
+          </li>
+          <li>
+            <div class="mod-body">
+              <h3>Your first week of AI-native PM</h3>
+              <div class="mod-pages">5 pages &middot; action plan</div>
+              <p>A five-day plan you can start Monday. What to try, in what order, with what to measure. Written so you can hand it to a PM on your team and have them actually do it.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- DELIVERABLES -->
+      <section class="block">
+        <div class="section-label">What you get</div>
+        <h2>Three things, one price.</h2>
+        <ul class="deliverables">
+          <li><span><strong>The playbook itself</strong> &mdash; a ~70-page PDF written the way I&rsquo;d want to read it: short chapters, real examples, no padding.</span></li>
+          <li><span><strong>The prompt library in Notion</strong> &mdash; 25+ prompts you can fork into your own workspace and edit. Updated as I refine them.</span></li>
+          <li><span><strong>Free updates for a year</strong> &mdash; the tooling is moving quickly. When I ship a v1.1, you get it.</span></li>
+        </ul>
+      </section>
+
+      <!-- AUTHOR -->
+      <section class="block">
+        <div class="section-label">Who&rsquo;s writing this</div>
+        <h2>Why this isn&rsquo;t another AI-for-PMs course.</h2>
+        <div class="author-card">
+          <img src="../images/portrait.jpg" alt="Shane Pereira" width="72" height="72" />
+          <div>
+            <h3>Shane Pereira</h3>
+            <div class="author-role">Lead Technical PM &middot; 13 years in product</div>
+            <p>I&rsquo;ve spent the last year running AI-native workflows across a real product team, shipping to warehouse operators across Europe, Australia and Japan. The playbook is literally the written form of what I&rsquo;ve been teaching my own PMs. Everything in it has been used in anger, in production, by people whose time I respect.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- WAITLIST -->
+      <section class="block" id="waitlist">
+        <div class="section-label">Reserve your copy</div>
+        <h2>The waitlist is the first-100 list.</h2>
+        <p>I&rsquo;m launching in January 2027. Signing up now gets you three things.</p>
+
+        <div class="waitlist">
+          <h3>Waitlist perks:</h3>
+          <ul class="perks">
+            <li>$39 early-bird price (versus $49 at launch) &mdash; first 100 only.</li>
+            <li>A free sample chapter emailed in December.</li>
+            <li>A one-paragraph input on what you most want covered, if you reply to the sample.</li>
+          </ul>
+          <a class="cta-primary" href="mailto:shanepereira05@gmail.com?subject=AI-Native%20PM%20Playbook%20waitlist&amp;body=Please%20add%20me%20to%20the%20AI-Native%20PM%20Playbook%20waitlist.%0A%0AMy%20role%2Fcontext%20(optional)%3A%0A">Join the waitlist</a>
+          <p style="font-size: 12px; color: var(--fg-subtle); margin-top: 12px; margin-bottom: 0;">Email only. No payment collected until launch. One-click unsubscribe any time.</p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="block faq">
+        <div class="section-label">Common questions</div>
+        <h2>Things people have asked before signing up.</h2>
+
+        <details>
+          <summary>Is this an intro to AI, or a PM playbook?</summary>
+          <p>Firmly the second. I assume you know what an LLM is and have used one. The whole book is about applying them to PM work specifically &mdash; not explaining the technology.</p>
+        </details>
+
+        <details>
+          <summary>What format is it delivered in?</summary>
+          <p>A PDF for the written playbook (so you can read on any device, annotate, print if that&rsquo;s your thing), plus a shareable Notion template for the prompt library.</p>
+        </details>
+
+        <details>
+          <summary>Can I share it with my team?</summary>
+          <p>Yes &mdash; the license covers your immediate team (up to five people). If you want a larger team or company-wide license, email me and we&rsquo;ll work something out.</p>
+        </details>
+
+        <details>
+          <summary>What&rsquo;s the refund policy?</summary>
+          <p>14 days, no questions asked. Email me, I refund in full. I&rsquo;d rather give your money back than have you feeling stuck with something that didn&rsquo;t land.</p>
+        </details>
+
+        <details>
+          <summary>Will this still be relevant in six months?</summary>
+          <p>The tooling will shift. The patterns won&rsquo;t. I update the playbook roughly quarterly and free updates are included for a year from purchase.</p>
+        </details>
+
+        <details>
+          <summary>What if I&rsquo;m not a PM?</summary>
+          <p>If you&rsquo;re a founder, engineering manager, or designer doing PM-shaped work, the prompts and workflows will still be useful. If you&rsquo;re deep in a non-product role, there are better books for you &mdash; email me and I&rsquo;ll point you at one.</p>
+        </details>
+
+        <details>
+          <summary>Is this affiliated with your employer?</summary>
+          <p>No. The playbook is a personal project, written on my own time, outside my employer&rsquo;s product scope. Everything in it is generic PM craft, not internal to any company I&rsquo;ve worked at.</p>
+        </details>
+      </section>
+
+      <!-- FINAL CTA -->
+      <div class="final-cta">
+        <h2>First 100 subscribers. 20% off. Nothing to pay today.</h2>
+        <p>Launching January 2027. One email, one click, and you&rsquo;re in.</p>
+        <a class="cta-primary" href="mailto:shanepereira05@gmail.com?subject=AI-Native%20PM%20Playbook%20waitlist&amp;body=Please%20add%20me%20to%20the%20AI-Native%20PM%20Playbook%20waitlist.%0A%0AMy%20role%2Fcontext%20(optional)%3A%0A">Join the waitlist</a>
+      </div>
+
+      <!-- SMALL PRINT -->
+      <div class="smallprint">
+        <p>The playbook is a personal project by Shane Pereira, written and sold in a personal capacity outside working hours. It is not affiliated with, authorised by, or endorsed by Nike or any prior employer. All examples and workflows described are generic PM craft and do not contain confidential material from any employer.</p>
+        <p>Payments at launch will be processed through a merchant-of-record platform (Lemon Squeezy or Gumroad &mdash; final choice at launch). Local taxes, VAT and GST are handled by the platform.</p>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
